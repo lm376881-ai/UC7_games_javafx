@@ -1,5 +1,6 @@
 package br.senac.sp.gamesfx;
 
+import br.senac.sp.gamesfx.ui.home.PainelHome;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,11 +14,8 @@ import java.io.IOException;
 
 public class TelaPrincipal extends Application {
 
-
-    private static final String COR_PADRÃO = "#FFFF10";
-    private static final String COR_HOVER= "#594e07";
-    private static final String TEXT0_BRANCO = "-fx-text-fill: #ffffff";
-
+    private static final String COR_PADRAO ="-fx-background-color: #bd943c; -fx-text-fill: #ffffff;-fx-alignment: center;-fx-cursor: hand";
+    private static final String COR_HOVER ="-fx-background-color: #070707; -fx-text-fill: #ffffff;-fx-alignment: center;-fx-cursor: hand";
 
 
     @Override
@@ -30,15 +28,15 @@ public class TelaPrincipal extends Application {
         VBox painelLateral = new VBox();
         painelLateral.setSpacing(5);
         painelLateral.setPrefWidth(150);
-        painelLateral.setStyle("-fx-background-color: #594e07");
-        painelLateral.setPadding(new Insets(30));
+        painelLateral.setStyle("-fx-background-color:#403d93");
+        painelLateral.setPadding(new Insets(10));
 
         Button btnJogos = criarBotaoMenu("Jogos");
-        Button btnPlataformas = criarBotaoMenu("Plataforma");
-        Button btnEstudios = criarBotaoMenu("Estúdios");
+        Button btnPlataformas = criarBotaoMenu("Plataformas");
+        Button btnEstudios = criarBotaoMenu("Estudios");
         Button btnHome = criarBotaoMenu("Home");
 
-        aplicarEfeitoHover(btnJogos, btnHome, btnEstudios, btnPlataformas);
+        aplicarEfeitoHover(btnJogos,btnHome,btnEstudios,btnPlataformas);
 
         painelLateral.getChildren().addAll(
                 btnHome,
@@ -46,51 +44,57 @@ public class TelaPrincipal extends Application {
                 btnPlataformas,
                 btnEstudios
         );
-//        painelLateral.getChildren().add(btnJogos);
-//        painelLateral.getChildren().add(btnPlataformas);
-//        painelLateral.getChildren().add(btnEstudios);
+
+//        paineilLateral.getChildren().add(btnJogos);
+//        paineilLateral.getChildren().add(btnPlataformas);
+//        paineilLateral.getChildren().add(btnEstudios);
+//        paineilLateral.getChildren().add(btnHome);
 
         raiz.setLeft(painelLateral);
         raiz.setStyle("-fx-background-color: #ffffff");
 
+        PainelHome painelHome = new PainelHome();
 
-        Scene cena = new Scene(raiz, 900, 600);
+        raiz.setCenter(painelHome.criarPainelHome());
+
+        Scene cena = new Scene(raiz, 900,600);
         stage.setScene(cena);
-       // stage.setResizable(false);
-        stage.setTitle("Sistema de gestão de jogos V1.0");
-        stage.setMaximized(true);
+        stage.setTitle("Sistema de Gestão de Jogos V1.0");
+        stage.setResizable(true);
+        // stage.setMaximized(true);
         stage.getIcons().add(iconeTela);
         stage.show();
-
-
-
     }
 
-    private Button criarBotaoMenu(String textoDoBotao) {
-        Button button = new Button(textoDoBotao);
-        button.setPadding (new Insets( 10));
+    private Button criarBotaoMenu(String textoDoBotao){
+        Button button =new Button(textoDoBotao);
+
+        button.setPadding(new Insets(10));
+
         button.setPrefWidth(Double.MAX_VALUE);
-        return  button;
+
+        // button.setStyle("-fx-background-color: #1b3f55; -fx-text-fill: #ffffff;-fx-alignment: center;-fx-cursor: hand");
+        return button;
+    }
+
+    private void aplicarEfeitoHover(Button... botoes){
+        for(Button button: botoes){
+
+            button.setStyle(COR_PADRAO);
+
+
+            //Ao passar no botão
+            button.setOnMouseEntered(event -> {
+                button.setStyle(COR_HOVER);
+
+            });
+            //Ao sair no botão
+            button.setOnMouseExited(event -> {
+                button.setStyle(COR_PADRAO );
+            });
+        }
 
     }
-    private void aplicarEfeitoHover (Button... botoes){
 
-        for(Button button : botoes){
 
-              button .setStyle("-fx-background-color: " + COR_PADRÃO );
-
-              button.setOnMouseEntered(e-> {
-
-                          button.setStyle("-fx-background-color: " + COR_HOVER + ";" +  TEXT0_BRANCO + ";" + "-fx-alignment: center;" + "-fx-cursor: hand;" );
-
-                      }
-              );
-
-              button.setOnMouseExited( e ->{
-                button.setStyle("-fx-background-color: "+ COR_PADRÃO);
-        }
-        );
-        }
-    }
 }
-
