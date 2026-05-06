@@ -19,6 +19,7 @@ public class PainelHome {
         painelPrincipal.setStyle("-fx-background-color: #8a8a8a");
         painelPrincipal.setPadding(new Insets(5, 20, 20, 20));
 
+
         // Painel de titulo
         VBox painelTitulo = new VBox();
         painelTitulo.setStyle("-fx-background-color: #aaaaaa");
@@ -45,7 +46,7 @@ public class PainelHome {
         // Criar painel de contatos
         VBox painelContatos = new VBox(4);
         painelContatos.setAlignment(Pos.CENTER);
-        painelContatos.setStyle("-fx-background-color: #7a7979; -fx-border-width: 2; -fx-border-color: #040404; -fx-border-radius: 32; -fx-background-radius: 32");
+        painelContatos.setStyle("-fx-background-color: #9e9e9e; -fx-border-width: 2; -fx-border-color: #040404; -fx-border-radius: 32; -fx-background-radius: 32");
         painelContatos.setMaxWidth(600);
         painelContatos.setPadding(new Insets(20));
         VBox.setMargin(painelContatos, new Insets( 30,20,30,20));
