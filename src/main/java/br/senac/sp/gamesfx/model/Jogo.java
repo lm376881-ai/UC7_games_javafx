@@ -17,6 +17,12 @@ public class Jogo {
     private boolean finalizado;
 // termino da propriedade
 
+    public Jogo(int id, String titulo, String plataforma){
+        this.id = id;
+        this.titulo = titulo;
+        this.plataforma = plataforma;
+    }
+
     public int getId() {
         return id;
     }
