@@ -19,6 +19,12 @@ import java.time.LocalDate;
 
 public class PainelJogos {
 
+    private Stage stage;
+
+    public PainelJogos(Stage stage ){
+
+    }
+
     public VBox criarPainelJogos() {
 
         VBox painelJogos = new VBox();
@@ -94,7 +100,7 @@ public class PainelJogos {
 
         Button bntEditar = criarBotao("Editar", "/imagens/editar.png");
         Button btnExibir = criarBotao("Exibir", "/imagens/visualizar.png");
-        Button btnExcluir = criarBotao("Exibir", "/imagens/excluir.png");
+        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
 
 
 
