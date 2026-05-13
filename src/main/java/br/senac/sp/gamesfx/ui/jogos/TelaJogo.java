@@ -42,9 +42,10 @@ public class TelaJogo {
         // chamar
         raiz.setTop(criarPainelTitulo());
         raiz.setCenter(criarFormulario());
+        raiz.setBottom(criarPainelBotoes());
 
         // para conseguir chamar todo os metodos criados
-        Scene cena = new Scene(raiz, 500, 400);
+        Scene cena = new Scene(raiz, 500, 500);
 
         stage.setScene(cena);
         stage.setResizable(false);
@@ -53,11 +54,7 @@ public class TelaJogo {
     }
 
     private  HBox criarPainelTitulo(){
-
-
-
-        HBox painelTitulo = new HBox(20);
-
+        HBox painelTitulo = new HBox(10);
         painelTitulo.setPadding(new Insets(20,0,20,20));
         painelTitulo.setStyle("-fx-background-color: #9e9e9e");
         painelTitulo.setAlignment(Pos.CENTER_LEFT);
@@ -88,10 +85,22 @@ public class TelaJogo {
 
         VBox formulario = new VBox();
 
-        GridPane gridFormulario = new GridPane();
+        formulario.setPadding(new Insets(50));
+
+        GridPane gridFormulario = new GridPane(6,6);
+        gridFormulario.setGridLinesVisible(false); // linhas da tabela
+        gridFormulario.setPadding( new Insets(30)); // por borda no formulario
+        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color:  #9e9e9e; -fx-border-radius: 8"); // trocar de cor a borda
+        gridFormulario.setAlignment(Pos.CENTER);
+
+
 
         ObservableList<String> plataformas = FXCollections.observableArrayList(
                 "Super Nintendo", "Playstation 2", "Xbox 360", "PC ", "Mega Drive", "Polistation"
+        );
+
+        ObservableList<String> Estudio = FXCollections.observableArrayList(
+                "Nintendo", "Rockstar Games", "BlizzardEntertainment", "Ubisoft", "Naughty Dog"
         );
 
         // Criar componentes que serão exibidos no grid
@@ -106,8 +115,17 @@ public class TelaJogo {
         Label lblPlataforma = new Label("Plataforma");
         comboPlataforma = new ComboBox<>(plataformas);
 
-        Label lblEstudio = new Label("Plataforma");
-        comboEstudio = new ComboBox<>(plataformas);
+        Label lblEstudio = new Label("Estudio");
+        comboEstudio = new ComboBox<>(Estudio);
+
+        Label lblValor = new Label("Valor");
+        tfValor = new TextField();
+        tfValor.setPromptText("Valor");
+
+        Label lblDataLancamento = new Label("Data de lançamento");
+        dpDataLancamento = new DatePicker();
+
+        cbFinalizado = new CheckBox("Finalizado");
 
 
 
@@ -115,14 +133,60 @@ public class TelaJogo {
 
         gridFormulario.add(lblId, 0, 0);
         gridFormulario.add(tfId, 1, 0);
+
         gridFormulario.add(lblTitulo,0,1);
         gridFormulario.add(tfTitulo,1,1);
+
         gridFormulario.add(lblPlataforma,0,2);
-        gridFormulario.add(comboEstudio, 1,2);
+        gridFormulario.add(comboPlataforma,1,2 );
+
+        gridFormulario.add(comboEstudio, 1,3);
+        gridFormulario.add(lblEstudio, 0,3);
+
+        gridFormulario.add(lblValor, 0,4);
+        gridFormulario.add(tfValor,1,4);
+
+        gridFormulario.add(lblDataLancamento, 0,5);
+        gridFormulario.add(dpDataLancamento,1,5);
+
+        gridFormulario.add(cbFinalizado, 1,6);
 
 
-        formulario.getChildren().add(gridFormulario);
+
+
+
+        formulario.getChildren().addAll(gridFormulario);
 
         return formulario;
+    }
+
+    private HBox criarPainelBotoes(){
+
+        HBox painelBotoes = new HBox(20);
+
+
+        painelBotoes.setAlignment(Pos.CENTER_RIGHT);
+        painelBotoes.setStyle("-fx-background-color: #9e9e9e");
+        painelBotoes.setPadding(new Insets(20));
+
+        Button btnSalvar = new Button();
+        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/disquete.png")); // aqui adiciona imagem ao botão
+        ImageView ivSalvar = new ImageView(imgSalvar);
+        btnSalvar.setGraphic(ivSalvar);
+        btnSalvar.setTooltip(new Tooltip("Salvar Dados do jogo"));
+
+
+
+
+        Button btnCancelar = new Button();
+        Image imgCancelar= new Image(getClass().getResourceAsStream("/imagens/cancelar.png"));
+        ImageView ivCancelar = new ImageView(imgCancelar);
+        btnCancelar.setGraphic(ivCancelar);
+        btnCancelar.setTooltip(new Tooltip("Cancelar"));
+
+
+        painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
+
+        return painelBotoes;
     }
 }
