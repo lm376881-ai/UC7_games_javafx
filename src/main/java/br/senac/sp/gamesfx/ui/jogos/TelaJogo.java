@@ -122,6 +122,7 @@ public class TelaJogo {
         tfValor = new TextField();
         tfValor.setPromptText("Valor");
 
+
         Label lblDataLancamento = new Label("Data de lançamento");
         dpDataLancamento = new DatePicker();
 
