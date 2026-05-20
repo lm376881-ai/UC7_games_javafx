@@ -5,6 +5,7 @@ module br.senac.sp.gamesfx {
     requires org.controlsfx.controls;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires java.management;
 
     opens br.senac.sp.gamesfx to javafx.fxml;
     opens br.senac.sp.gamesfx.model to javafx.base;

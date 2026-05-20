@@ -15,6 +15,7 @@ public class ConexaoSQLite {
 
         try {
             Connection conexao = DriverManager.getConnection(url);
+            System.out.println("Sucesso");
             return conexao;
         } catch (SQLException e) {
             System.out.println("Ocorreu erro durante a conexão com o banco");

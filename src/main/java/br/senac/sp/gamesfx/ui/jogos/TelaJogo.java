@@ -1,5 +1,7 @@
 package br.senac.sp.gamesfx.ui.jogos;
 
+import br.senac.sp.gamesfx.data.repository.JogoRepository;
+import br.senac.sp.gamesfx.model.Jogo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -15,6 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.management.Attribute;
+import java.time.LocalDate;
+
 public class TelaJogo {
 
     // para conseguir exibir ser visivél e salvar texsto passado dentro do formulario
@@ -26,6 +31,7 @@ public class TelaJogo {
     private ComboBox <String>  comboEstudio;
     private DatePicker dpDataLancamento;
     private CheckBox cbFinalizado;
+    private ComboBox <String> comboCategoria;
 
 
     public void criarTela(Stage stagePai) {
@@ -103,6 +109,14 @@ public class TelaJogo {
                 "Nintendo", "Rockstar Games", "BlizzardEntertainment", "Ubisoft", "Naughty Dog"
         );
 
+
+        ObservableList<String> categoria = FXCollections.observableArrayList(
+                "Ação", "Aventura", "RPG", "Esporte", "Corrida", "Terror", "Simulação", "Estratégia",
+                "Puzzle", "Plataforma", "FPS", "TPS", "Battle Royale", "Sandbox", "MMORPG",
+                "Arcade", "Luta", "Sobrevivência", "Mundo Aberto", "Musical"
+        );
+
+
         // Criar componentes que serão exibidos no grid
         Label lblId = new Label ("ID:");
         tfId = new TextField();
@@ -121,6 +135,9 @@ public class TelaJogo {
         Label lblValor = new Label("Valor");
         tfValor = new TextField();
         tfValor.setPromptText("Valor");
+
+        Label lblCategoria = new Label("Categoria");
+        comboCategoria = new ComboBox<>(categoria);
 
 
         Label lblDataLancamento = new Label("Data de lançamento");
@@ -144,16 +161,16 @@ public class TelaJogo {
         gridFormulario.add(comboEstudio, 1,3);
         gridFormulario.add(lblEstudio, 0,3);
 
-        gridFormulario.add(lblValor, 0,4);
-        gridFormulario.add(tfValor,1,4);
+        gridFormulario.add(lblValor, 0,6);
+        gridFormulario.add(tfValor,1,6);
 
         gridFormulario.add(lblDataLancamento, 0,5);
         gridFormulario.add(dpDataLancamento,1,5);
 
-        gridFormulario.add(cbFinalizado, 1,6);
+        gridFormulario.add(lblCategoria, 0,4);
+        gridFormulario.add(comboCategoria, 1,4);
 
-
-
+        gridFormulario.add(cbFinalizado, 1,7);
 
 
         formulario.getChildren().addAll(gridFormulario);
@@ -176,7 +193,21 @@ public class TelaJogo {
         btnSalvar.setGraphic(ivSalvar);
         btnSalvar.setTooltip(new Tooltip("Salvar Dados do jogo"));
 
+        btnSalvar.setOnAction(evento ->{
+            Jogo jogo = new Jogo();
+            jogo.setTitulo(tfTitulo.getText());
+            jogo.setPlataforma(comboPlataforma.getValue());
+            jogo.setEstudio(comboEstudio.getValue());
+            jogo.setDataLancamento(dpDataLancamento.getValue());
+            jogo.setCategoria("Testando Categoria");
+            jogo.setFinalizado(cbFinalizado.isSelected());
+            jogo.setPreco(Double.parseDouble(tfValor.getText()));
 
+            //Criar o repositorio para enviar o jogo
+            JogoRepository repository = new JogoRepository();
+            repository.salvar(jogo);
+
+        });
 
 
         Button btnCancelar = new Button();
@@ -186,8 +217,19 @@ public class TelaJogo {
         btnCancelar.setTooltip(new Tooltip("Cancelar"));
 
 
-        painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
+        painelBotoes.getChildren().addAll(btnSalvar,btnCancelar);
 
         return painelBotoes;
+    }
+
+    private void limparCampos() {
+        tfTitulo.clear();
+        tfId.clear();
+        tfValor.clear();
+        comboEstudio.setValue("");
+        comboPlataforma.setValue("");
+        comboCategoria.setValue("");
+        dpDataLancamento.setValue(LocalDate.now());
+        tfTitulo.requestFocus();
     }
 }
