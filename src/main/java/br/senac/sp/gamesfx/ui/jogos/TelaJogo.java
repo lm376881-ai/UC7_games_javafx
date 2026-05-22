@@ -1,5 +1,4 @@
 package br.senac.sp.gamesfx.ui.jogos;
-
 import br.senac.sp.gamesfx.data.repository.JogoRepository;
 import br.senac.sp.gamesfx.model.Jogo;
 import javafx.collections.FXCollections;
@@ -16,220 +15,242 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.CheckBox;
 
-import javax.management.Attribute;
+import javax.swing.*;
 import java.time.LocalDate;
+
 
 public class TelaJogo {
 
-    // para conseguir exibir ser visivél e salvar texsto passado dentro do formulario
-    private TextField tfId;
-    private  TextField tfTitulo;
-    // acima e abaixo variaveis declaradas
-    private TextField tfValor;
-    private ComboBox <String>  comboPlataforma;
-    private ComboBox <String>  comboEstudio;
-    private DatePicker dpDataLancamento;
-    private CheckBox cbFinalizado;
-    private ComboBox <String> comboCategoria;
 
+    private TextField tfId = new TextField();
+    private TextField tfTitulo = new TextField();
+    private TextField tfValor = new TextField();
+    private ComboBox<String> comboPlataforma = new ComboBox<>();
+    private ComboBox<String> comboEstudio = new ComboBox<>();
+    private TextField tfCategoria = new TextField();
+    private DatePicker dpDataLacamento = new DatePicker();
+    private CheckBox cbFinalizado = new CheckBox();
+
+
+    public TelaJogo(Jogo jogo){
+        tfId.setText(String.valueOf(jogo.getId()));
+        tfTitulo.setText(jogo.getTitulo());
+        tfValor.setText(String.valueOf(jogo.getPreco()));
+        tfCategoria.setText(String.valueOf(jogo.getCategoria()));
+        comboPlataforma.setValue(jogo.getPlataforma());
+        comboEstudio.setValue(jogo.getEstudio());
+        dpDataLacamento.setValue(jogo.getDataLancamento());
+        cbFinalizado.setSelected(jogo.isFinalizado());
+    }
+
+    public TelaJogo(){}
 
     public void criarTela(Stage stagePai) {
 
-        // tela quando clico em jogos
         Stage stage = new Stage();
         stage.initOwner(stagePai);
         stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.setMaxWidth(500);
+        stage.setHeight(500);
         stage.setTitle("Cadastro de Jogo");
 
-        // Criar um BorderPane = parte de cima onde fica o
         BorderPane raiz = new BorderPane();
-
-        // chamar
         raiz.setTop(criarPainelTitulo());
         raiz.setCenter(criarFormulario());
-        raiz.setBottom(criarPainelBotoes());
+        raiz.setBottom(criarPainelBotoes(stage));
 
-        // para conseguir chamar todo os metodos criados
-        Scene cena = new Scene(raiz, 500, 500);
+        Scene cena = new Scene(raiz, 500, 700);
 
-        stage.setScene(cena);
+//        stage.setHeight(400);
+//        stage.setWidth(500);
         stage.setResizable(false);
+        stage.setScene(cena);
         stage.showAndWait();
 
     }
 
-    private  HBox criarPainelTitulo(){
-        HBox painelTitulo = new HBox(10);
-        painelTitulo.setPadding(new Insets(20,0,20,20));
-        painelTitulo.setStyle("-fx-background-color: #9e9e9e");
+    public HBox criarPainelTitulo() {
+
+        HBox painelTitulo = new HBox();
+
+        painelTitulo.setPadding(new Insets(20, 0, 20, 20));
+        painelTitulo.setStyle("-fx-background-color:#2e2b68; ");
         painelTitulo.setAlignment(Pos.CENTER_LEFT);
 
-        // Imagem do Titulo
-        Image image = new Image(getClass().getResourceAsStream("/imagens/adicionar.png"));
+        Image image = new Image(getClass().getResourceAsStream("/imagens/exame.png"));
         ImageView imageView = new ImageView(image);
 
-        imageView.setFitHeight(45); // para alterar tamanho da imagem
-        imageView.setFitWidth(45);
+        imageView.setFitWidth(40);
+        imageView.setFitHeight(40);
 
-
-        // Texto do Titulo
         Label lblTitulo = new Label("Cadastro de Jogos");
-        lblTitulo.setStyle("-fx-text-fill: #ffffffff; -fx-font-size: 22; -fx-font-weight: bold"); // alterar  cor, tamanho da fonte e deixar em negrito
-
-
-
-        // Adicionar os componentes do Hbox
         painelTitulo.getChildren().addAll(imageView, lblTitulo);
+        lblTitulo.setStyle("-fx-font-size: 28; " +
+                "-fx-font-weight: bold; " +
+                "-fx-text-fill: #ffffff;");
 
-        return  painelTitulo;
-
+        return painelTitulo;
     }
 
-    //
     private VBox criarFormulario() {
+        ObservableList<String> plataformas = FXCollections.observableArrayList(
+                "Super Nintendo", "Mega Drive", "PlayStation1", "PC", "Xbox"
+        );
+
+        ObservableList<String> estudios = FXCollections.observableArrayList(
+                "Capcom", "Activision", " Blizzard", "Bandai Namco", "Rockstar Games", "PlayStation Studios"
+        );
 
         VBox formulario = new VBox();
+        formulario.setPadding(new Insets(20));
 
-        formulario.setPadding(new Insets(50));
-
-        GridPane gridFormulario = new GridPane(6,6);
-        gridFormulario.setGridLinesVisible(false); // linhas da tabela
-        gridFormulario.setPadding( new Insets(30)); // por borda no formulario
-        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color:  #9e9e9e; -fx-border-radius: 8"); // trocar de cor a borda
-        gridFormulario.setAlignment(Pos.CENTER);
+        GridPane gridFormulario = new GridPane(5, 5);
+        gridFormulario.setGridLinesVisible(false);
+        gridFormulario.setPadding(new Insets(20));
+        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color: #2e2b68;-fx-border-radius: 32");
 
 
-
-        ObservableList<String> plataformas = FXCollections.observableArrayList(
-                "Super Nintendo", "Playstation 2", "Xbox 360", "PC ", "Mega Drive", "Polistation"
-        );
-
-        ObservableList<String> Estudio = FXCollections.observableArrayList(
-                "Nintendo", "Rockstar Games", "BlizzardEntertainment", "Ubisoft", "Naughty Dog"
-        );
-
-
-        ObservableList<String> categoria = FXCollections.observableArrayList(
-                "Ação", "Aventura", "RPG", "Esporte", "Corrida", "Terror", "Simulação", "Estratégia",
-                "Puzzle", "Plataforma", "FPS", "TPS", "Battle Royale", "Sandbox", "MMORPG",
-                "Arcade", "Luta", "Sobrevivência", "Mundo Aberto", "Musical"
-        );
-
-
-        // Criar componentes que serão exibidos no grid
-        Label lblId = new Label ("ID:");
-        tfId = new TextField();
+        // Criar os componentes que seram importados no grid
+        Label lblId = new Label("ID:");
         tfId.setEditable(false);
+        tfId.setDisable(true);
 
-        Label lblTitulo = new Label ("Titulo:");
-        tfTitulo = new TextField();
-        tfTitulo.setPromptText("Ex. Pro Evolution Soccer");
+        Label lblTitulo = new Label("Título: ");
+        tfTitulo.setPromptText("Ex: Mortal Kombat");
 
-        Label lblPlataforma = new Label("Plataforma");
-        comboPlataforma = new ComboBox<>(plataformas);
+        Label lblPlataforma = new Label("Plataformas: ");
+        comboPlataforma.setItems(plataformas);
 
-        Label lblEstudio = new Label("Estudio");
-        comboEstudio = new ComboBox<>(Estudio);
+        Label lblEstudio = new Label("Estudios:");
+        comboEstudio.setItems(estudios);
 
-        Label lblValor = new Label("Valor");
-        tfValor = new TextField();
-        tfValor.setPromptText("Valor");
+        Label lblCategoria = new Label("Categoria:");
+        tfCategoria.setPromptText("Ex: Aventura");
 
-        Label lblCategoria = new Label("Categoria");
-        comboCategoria = new ComboBox<>(categoria);
+        Label lblValor = new Label("Valor: ");
+        tfValor.setPromptText("Ex.9.99");
 
-
-        Label lblDataLancamento = new Label("Data de lançamento");
-        dpDataLancamento = new DatePicker();
-
-        cbFinalizado = new CheckBox("Finalizado");
+        Label lblDatalancamento = new Label("Data de Lançamento: ");
 
 
 
-        // Adicionar os componentes no Grid
+        // Add os componentes GRID
 
         gridFormulario.add(lblId, 0, 0);
         gridFormulario.add(tfId, 1, 0);
 
-        gridFormulario.add(lblTitulo,0,1);
-        gridFormulario.add(tfTitulo,1,1);
+        gridFormulario.add(lblTitulo, 0, 1);
+        gridFormulario.add(tfTitulo, 1, 1);
 
-        gridFormulario.add(lblPlataforma,0,2);
-        gridFormulario.add(comboPlataforma,1,2 );
+        gridFormulario.add(lblPlataforma, 0, 2);
+        gridFormulario.add(comboPlataforma, 1, 2);
 
-        gridFormulario.add(comboEstudio, 1,3);
-        gridFormulario.add(lblEstudio, 0,3);
+        gridFormulario.add(lblEstudio, 0, 3);
+        gridFormulario.add(comboEstudio, 1, 3);
 
-        gridFormulario.add(lblValor, 0,6);
-        gridFormulario.add(tfValor,1,6);
+        gridFormulario.add(lblCategoria, 0, 4);
+        gridFormulario.add(tfCategoria, 1, 4);
 
-        gridFormulario.add(lblDataLancamento, 0,5);
-        gridFormulario.add(dpDataLancamento,1,5);
+        gridFormulario.add(lblValor, 0, 5);
+        gridFormulario.add(tfValor, 1, 5);
 
-        gridFormulario.add(lblCategoria, 0,4);
-        gridFormulario.add(comboCategoria, 1,4);
+        gridFormulario.add(lblDatalancamento, 0, 6);
+        gridFormulario.add(dpDataLacamento, 1, 6);
 
-        gridFormulario.add(cbFinalizado, 1,7);
+        gridFormulario.add(cbFinalizado, 1, 7);
 
 
-        formulario.getChildren().addAll(gridFormulario);
+        formulario.getChildren().add(gridFormulario);
 
         return formulario;
     }
 
-    private HBox criarPainelBotoes(){
-
-        HBox painelBotoes = new HBox(20);
-
-
-        painelBotoes.setAlignment(Pos.CENTER_RIGHT);
-        painelBotoes.setStyle("-fx-background-color: #9e9e9e");
-        painelBotoes.setPadding(new Insets(20));
+    private HBox criarPainelBotoes(Stage stage) {
+        HBox painelBotoes = new HBox(10);
+        painelBotoes.setStyle("-fx-background-color: #832929");
+        painelBotoes.setPadding(new Insets(10));
+        painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button btnSalvar = new Button();
-        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/disquete.png")); // aqui adiciona imagem ao botão
+        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/salve.png"));
         ImageView ivSalvar = new ImageView(imgSalvar);
         btnSalvar.setGraphic(ivSalvar);
-        btnSalvar.setTooltip(new Tooltip("Salvar Dados do jogo"));
+        btnSalvar.setTooltip(new Tooltip("Salvar dados do jogo"));
 
-        btnSalvar.setOnAction(evento ->{
+        btnSalvar.setOnAction(evento -> {
             Jogo jogo = new Jogo();
             jogo.setTitulo(tfTitulo.getText());
             jogo.setPlataforma(comboPlataforma.getValue());
             jogo.setEstudio(comboEstudio.getValue());
-            jogo.setDataLancamento(dpDataLancamento.getValue());
+            jogo.setDataLancamento(dpDataLacamento.getValue());
             jogo.setCategoria("Testando Categoria");
             jogo.setFinalizado(cbFinalizado.isSelected());
-            jogo.setPreco(Double.parseDouble(tfValor.getText()));
+
+            try {
+                double preco = Double.parseDouble(tfValor.getText());
+                jogo.setPreco(preco);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Digite um valor válido (ex: 9.99)");
+                return;
+            }
+
 
             //Criar o repositorio para enviar o jogo
             JogoRepository repository = new JogoRepository();
-            repository.salvar(jogo);
+            if (tfId.getText().equals("")) {
+                repository.salvar(jogo);
+            } else {
+                jogo.setId(Integer.parseInt(tfId.getText()));
+                repository.editar(jogo);
+            }
+
+//            JOptionPane.showMessageDialog(
+//                    null,
+//                    "Jogo cadastrado com sucesso!",
+//                    "Erro",
+//                    JOptionPane.ERROR_MESSAGE
+//            );
+            int resposta = JOptionPane.showConfirmDialog(
+                    null,
+                    "Jogo cadastrado com sucesso!\nDeseja cadastrar outro jogo?",
+                    "Cadastro",
+                    JOptionPane.YES_NO_OPTION
+
+            );
+
+            if (resposta != 0){
+                stage.close();
+            }
+
+            limparCampos();
+
 
         });
 
-
         Button btnCancelar = new Button();
-        Image imgCancelar= new Image(getClass().getResourceAsStream("/imagens/cancelar.png"));
+        Image imgCancelar = new Image(getClass().getResourceAsStream("/imagens/cancelar.png"));
         ImageView ivCancelar = new ImageView(imgCancelar);
         btnCancelar.setGraphic(ivCancelar);
-        btnCancelar.setTooltip(new Tooltip("Cancelar"));
+        btnCancelar.setTooltip(new Tooltip("Cancelar dados do jogo"));
 
-
-        painelBotoes.getChildren().addAll(btnSalvar,btnCancelar);
+        painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
 
         return painelBotoes;
     }
 
     private void limparCampos() {
+
         tfTitulo.clear();
-        tfId.clear();
+        tfCategoria.clear();
         tfValor.clear();
         comboEstudio.setValue("");
         comboPlataforma.setValue("");
-        comboCategoria.setValue("");
-        dpDataLancamento.setValue(LocalDate.now());
+        cbFinalizado.setSelected(false);
+        dpDataLacamento.setValue(LocalDate.now());
         tfTitulo.requestFocus();
     }
+
 }
