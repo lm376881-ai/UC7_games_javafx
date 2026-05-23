@@ -8,9 +8,9 @@ public class ConexaoSQLite {
 
     private static Connection conexao;
 
-    public static Connection getConexao (){
+    public static Connection getConexao(){
 
-        // String de conexão - URL do banco de dados
+        //String de conexão - URl do Banco de Dados
         String url = "jdbc:sqlite:/C:/Users/lucas.mnascimento25/banco_de_dados/db_games.db";
 
         try {
