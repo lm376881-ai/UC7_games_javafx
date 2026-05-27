@@ -21,7 +21,9 @@ public class Jogo {
     }
 
     //Construtor Default/Padrão
-    public Jogo(){}
+    public Jogo(){
+
+    }
 
 
 
