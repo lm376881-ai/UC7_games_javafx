@@ -2,6 +2,7 @@ package br.senac.sp.gamesfx;
 
 import br.senac.sp.gamesfx.ui.home.PainelHome;
 import br.senac.sp.gamesfx.ui.jogos.PainelJogos;
+import br.senac.sp.gamesfx.ui.jogos.PainelPlataforma;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -10,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class TelaPrincipal extends Application {
 
@@ -39,11 +38,18 @@ public class TelaPrincipal extends Application {
         });
 
         Button btnPlataformas = criarBotaoMenu("Plataformas");
+        btnPlataformas.setOnAction(clique -> {
+            PainelPlataforma painelPlataforma = new PainelPlataforma(stage);
+            raiz.setCenter(painelPlataforma.criarPainelPLataforma());
+        });
+
         Button btnEstudios = criarBotaoMenu("Estudios");
+
 
         Button btnHome = criarBotaoMenu("Home");
         btnHome.setOnAction(clique->{
             PainelHome painelHome = new PainelHome();
+            raiz.setCenter(painelHome.criarPainelHome());
         });
 
 
@@ -106,6 +112,7 @@ public class TelaPrincipal extends Application {
         }
 
     }
+
 
 
 }

@@ -27,10 +27,10 @@ public class PainelJogos {
     public VBox criarPainelJogos() {
 
         VBox painelJogos = new VBox();
-       painelJogos.setStyle("-fx-background-color:#aaaaaa;-fx-font-size: 12");
-       painelJogos.setPadding(new Insets(10,10,10,10)); // comando utilizado para redimencionar Vbox do painel jogos
+        painelJogos.setStyle("-fx-background-color:#aaaaaa;-fx-font-size: 12");
+        painelJogos.setPadding(new Insets(10,10,10,10)); // comando utilizado para redimencionar Vbox do painel jogos
 
-       // Titulo Painel de Jogos
+        // Titulo Painel de Jogos
 
         Label lblTitulo =  new Label("Listagem de jogos!");
         lblTitulo.setStyle("-fx-font-size: 24; -fx-text-fill: #ffffff; -fx-font-weight: bold");
@@ -85,8 +85,6 @@ public class PainelJogos {
         colunaFinalizado.setPrefWidth(80);
 
 
-
-
         // Adicionar Colunas a tabela
 
         tabelaJogos.getColumns().addAll(colunaId, colunaTitulo, colunaPlataforma, colunaCategoria, colunaEstudio, colunaPreco, colunaDataLancamento, colunaFinalizado);
@@ -95,7 +93,6 @@ public class PainelJogos {
         // Obter os dados que serão exibidos
 
         JogoRepository repository = new JogoRepository();
-
 
         // Adiciona a lista de jogos na tabela
 
@@ -129,13 +126,14 @@ public class PainelJogos {
         });
         Button btnExibir = criarBotao("Visualizar", "/imagens/visualizar.png");
 
+
         Button bntEditar = criarBotao("Editar", "/imagens/editar.png");
-         bntEditar.setOnAction(e ->{
-             Jogo jogoEditar = tabelaJogos.getSelectionModel().getSelectedItem();
-             TelaJogo telaJogo = new TelaJogo(jogoEditar);
-             telaJogo.criarTela(stage);
-             tabelaJogos.setItems(repository.getJogos()); // atulizar jogo após edição
-         });
+        bntEditar.setOnAction(e ->{
+            Jogo jogoEditar = tabelaJogos.getSelectionModel().getSelectedItem();
+            TelaJogo telaJogo = new TelaJogo(jogoEditar);
+            telaJogo.criarTela(stage);
+            tabelaJogos.setItems(repository.getJogos()); // atulizar jogo após edição
+        });
 
 
         painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
@@ -149,10 +147,6 @@ public class PainelJogos {
             telaJogo.criarTela(new Stage ());
             tabelaJogos.setItems(repository.getJogos());
         });
-
-
-
-
 
 
 

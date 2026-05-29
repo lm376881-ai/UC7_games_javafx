@@ -10,14 +10,16 @@ public class Plataforma {
     private LocalDate dataLancamento;
     private double valor;
 
-    public Plataforma(){}
-
     public Plataforma (int id, String nome, String fabricante, LocalDate dataLancamento, double valor) {
         this.id = id;
         this.nome = nome;
         this.fabricante = fabricante;
         this.dataLancamento = dataLancamento;
         this.valor = valor;
+    }
+
+    public Plataforma (){
+
     }
 
     public int getId() {
