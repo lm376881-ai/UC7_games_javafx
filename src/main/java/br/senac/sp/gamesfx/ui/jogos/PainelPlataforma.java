@@ -90,20 +90,30 @@ public class PainelPlataforma {
         HBox painelBotoes = new HBox(10);
 
         Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
+
+
         Button btnEditar = criarBotao("Editar", "/imagens/editar.png");
+        Button btnExibir = criarBotao("Exibir", "/imagens/visualizar.png");
         Button bntExcluir = criarBotao("Excluir","/imagens/excluir.png");
 
-        painelBotoes.getChildren().addAll(btnAdicionar, btnEditar, bntExcluir);
+        painelBotoes.getChildren().addAll(btnAdicionar, btnEditar, btnExibir,bntExcluir);
 
 
         painelPlataforma.getChildren().addAll(lblTitulo, linha, tabelaPlataforma, painelBotoes);
 
+
+        painelBotoes.setAlignment(Pos.CENTER_RIGHT);
+
+
         return painelPlataforma;
     }
+
 
     private Button criarBotao(String textoBotao, String urlImagem) {
         Image image = new Image(getClass().getResourceAsStream(urlImagem));
         ImageView imageView = new ImageView(image);
+
+
 
         imageView.setFitHeight(16);
         imageView.setFitWidth(16);

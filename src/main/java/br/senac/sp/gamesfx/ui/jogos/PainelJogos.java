@@ -103,8 +103,8 @@ public class PainelJogos {
         // Criar botões de ações
         HBox painelBotoes = new HBox(10);
 
-        Button botaoAdicionar = criarBotao("Adicionar", "/imagens/cancelar.png");
-        botaoAdicionar.setOnAction(e -> {
+        Button btnAdicionar = criarBotao("Adicionar", "/imagens/cancelar.png");
+        btnAdicionar.setOnAction(e -> {
             TelaJogo telaJogo = new TelaJogo();
             telaJogo.criarTela(stage);
             tabelaJogos.setItems(repository.getJogos());
@@ -125,6 +125,22 @@ public class PainelJogos {
 
         });
         Button btnExibir = criarBotao("Visualizar", "/imagens/visualizar.png");
+        btnExibir.setOnAction(event -> {
+
+            Jogo visualizarJogo = tabelaJogos.getSelectionModel().getSelectedItem();
+
+            if (visualizarJogo == null){
+                Alert alertaJogoNaoSelecionado = new Alert(Alert.AlertType.WARNING);
+                alertaJogoNaoSelecionado.setTitle("Visualização de Jogo");
+                alertaJogoNaoSelecionado.setHeaderText("Para visualizar um jogo você deve selecioná-lo na lista.");
+                alertaJogoNaoSelecionado.showAndWait();
+                return;
+            }
+
+            TelaJogo telaJogo = new TelaJogo(visualizarJogo);
+            telaJogo.criarTela(stage);
+
+        });
 
 
         Button bntEditar = criarBotao("Editar", "/imagens/editar.png");

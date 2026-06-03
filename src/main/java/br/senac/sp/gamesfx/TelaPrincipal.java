@@ -44,6 +44,10 @@ public class TelaPrincipal extends Application {
         });
 
         Button btnEstudios = criarBotaoMenu("Estudios");
+//            btnEstudios.setOnAction(event -> {
+//                PainelPlataforma painelPlataforma = new PainelPlataforma()
+//                raiz.setCenter(painelPlataforma.criarPainelHome());
+//            });
 
 
         Button btnHome = criarBotaoMenu("Home");
