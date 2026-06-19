@@ -1,279 +1,163 @@
-package br.senac.sp.gamesfx.ui.jogos;
-
-import br.senac.sp.gamesfx.data.repository.JogoRepository;
-import br.senac.sp.gamesfx.model.Jogo;
-import br.senac.sp.gamesfx.model.Plataforma;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.time.LocalDate;
-import java.util.Optional;
-
-public class TelaPlataforma {
-
-    private TextField tfId = new TextField();
-    private TextField tfNome = new TextField();
-    private ComboBox<String> comboFabricante = new ComboBox<>();
-    private TextField tfValor = new TextField();
-    private CheckBox cbFinalizado = new CheckBox("Finalizado");
-
-
-    public TelaPlataforma(Plataforma plataforma) {
-        tfId.setText(String.valueOf(plataforma.getId()));
-        tfNome.setText(plataforma.getNome());
-        tfValor.setText(String.valueOf(plataforma.getValor()));
-        comboFabricante.setValue(String.valueOf(plataforma.getFabricante()));
-        cbFinalizado.setSelected(plataforma.isFinalizado());
-    }
-}
-
-
-//        public TelaJogo(){}
-//
-//        public void criarTela(Stage stagePai) {
-//
-//            Stage stage = new Stage();
-//            stage.initOwner(stagePai);
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//
-//            stage.setMaxWidth(500);
-//            stage.setHeight(500);
-//            stage.setTitle("Cadastro de Jogo");
-//
-//            BorderPane raiz = new BorderPane();
-//            raiz.setTop(criarPainelTitulo());
-//            raiz.setCenter(criarFormulario());
-//            raiz.setBottom(criarPainelBotoes(stage));
-//
-//            Scene cena = new Scene(raiz, 500, 700);
-//
-////        stage.setHeight(400);
-////        stage.setWidth(500);
-//            stage.setResizable(false);
-//            stage.setScene(cena);
-//            stage.showAndWait();
-//
-//        }
-//
-//        public HBox criarPainelTitulo() {
-//
-//            HBox painelTitulo = new HBox();
-//
-//            painelTitulo.setPadding(new Insets(20, 0, 20, 20));
-//            painelTitulo.setStyle("-fx-background-color:#9a9a9a; ");
-//            painelTitulo.setAlignment(Pos.CENTER_LEFT);
-//
-//            Image image = new Image(getClass().getResourceAsStream("/imagens/exame.png"));
-//            ImageView imageView = new ImageView(image);
-//
-//            imageView.setFitWidth(40);
-//            imageView.setFitHeight(40);
-//
-//            Label lblTitulo = new Label("Cadastro de Jogos");
-//            painelTitulo.getChildren().addAll(imageView, lblTitulo);
-//            lblTitulo.setStyle("-fx-font-size: 28; " +
-//                    "-fx-font-weight: bold; " +
-//                    "-fx-text-fill: #ffffff;");
-//
-//            return painelTitulo;
-//        }
-//
-//        private VBox criarFormulario() {
-//            ObservableList<String> plataformas = FXCollections.observableArrayList(
-//                    "PC", "PlayStation 1", "PlayStation 2", "PlayStation 3", "PlayStation 4", "PlayStation 5", "Xbox", "Xbox 360",
-//                    "Xbox One", "Xbox Series X", "Nintendo Switch", "Android", "iOS"
-//            );
-//
-//            ObservableList<String> estudios = FXCollections.observableArrayList(
-//                    "Rockstar Games", "Naughty Dog", "Santa Monica Studio", "Insomniac Games", "Ubisoft", "Electronic Arts", "Activision",
-//                    "Bethesda Game Studios", "CD Projekt Red", "Square Enix", "Capcom", "Konami", "Bandai Namco", "343 Industries", "The Coalition",
-//                    "Guerrilla Games", "FromSoftware", "Epic Games", "Valve", "Nintendo"
-//            );
+//package br.senac.sp.gamesfx.ui.jogos;
 //
-//            ObservableList<String> categorias = FXCollections.observableArrayList(
-//                    "Ação", "Aventura","Esportes", "RPG", "FPS", "TPS", "Estratégia", "Simulação", "Esporte", "Corrida", "Luta",
-//                    "Puzzle", "Terror", "Survival", "Battle Royale", "MMO", "Sandbox", "Plataforma", "Stealth", "Ritmo", "Cartas"
-//            );
+//import br.senac.sp.gamesfx.model.Plataforma;
+//import javafx.geometry.Insets;
+//import javafx.geometry.Pos;
+//import javafx.scene.Scene;
+//import javafx.scene.control.*;
+//import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
+//import javafx.scene.layout.*;
+//import javafx.stage.Modality;
+//import javafx.stage.Stage;
 //
-//            VBox formulario = new VBox();
-//            formulario.setPadding(new Insets(20));
+//import java.time.LocalDate;
 //
-//            GridPane gridFormulario = new GridPane(5, 5);
-//            gridFormulario.setGridLinesVisible(false);
-//            gridFormulario.setPadding(new Insets(20));
-//            gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color: #676767;-fx-border-radius: 32");
+//public class TelaPlataforma {
 //
+//    private TextField tfId = new TextField();
+//    private TextField tfNome = new TextField();
+//    private TextField tfFabricante = new TextField();
+//    private TextField tfValor = new TextField();
+//    private DatePicker dpDataLancamento = new DatePicker();
 //
-//            // Criar os componentes que seram importados no grid
-//            Label lblId = new Label("ID:");
-//            tfId.setEditable(false);
-//            tfId.setDisable(true);
 //
-//            Label lblTitulo = new Label("Título: ");
-//            tfTitulo.setPromptText("Ex: Mortal Kombat");
+//    public TelaPlataforma(){}
 //
-//            Label lblPlataforma = new Label("Plataformas: ");
-//            comboPlataforma.setItems(plataformas);
 //
-//            Label lblEstudio = new Label("Estudios:");
-//            comboEstudio.setItems(estudios);
+//    public TelaPlataforma(Plataforma plataforma) {
+//        tfId.setText(String.valueOf(plataforma.getId()));
+//        tfNome.setText(plataforma.getNome());
+//        tfFabricante.setText(plataforma.getFabricante());
+//        tfValor.setText(String.valueOf(plataforma.getValor()));
+//        dpDataLancamento.setValue(plataforma.getDataLancamento());
+//    }
 //
-//            Label lblCategoria = new Label("Categoria:");
-//            comboCategoria.setItems(categorias);
+//    public void criarTela(Stage stagePai) {
 //
-//            Label lblValor = new Label("Valor: ");
-//            tfValor.setPromptText("Ex.9.99");
+//        Stage stage = new Stage();
+//        stage.initOwner(stagePai);
+//        stage.initModality(Modality.APPLICATION_MODAL);
 //
-//            Label lblDatalancamento = new Label("Data de Lançamento: ");
+//        stage.setTitle("Cadastro de Plataforma");
 //
+//        BorderPane raiz = new BorderPane();
+//        raiz.setTop(criarPainelTitulo());
+//        raiz.setCenter(criarFormulario());
+//        raiz.setBottom(criarPainelBotoes(stage));
 //
-//            // Add os componentes GRID
+//        Scene cena = new Scene(raiz, 500, 400);
+//        stage.setScene(cena);
+//        stage.setResizable(false);
+//        stage.showAndWait();
+//    }
 //
-//            gridFormulario.add(lblId, 0, 0);
-//            gridFormulario.add(tfId, 1, 0);
+//    private HBox criarPainelTitulo() {
 //
-//            gridFormulario.add(lblTitulo, 0, 1);
-//            gridFormulario.add(tfTitulo, 1, 1);
+//        HBox painel = new HBox(10);
+//        painel.setPadding(new Insets(20));
+//        painel.setAlignment(Pos.CENTER_LEFT);
+//        painel.setStyle("-fx-background-color:#9a9a9a;");
 //
-//            gridFormulario.add(lblPlataforma, 0, 2);
-//            gridFormulario.add(comboPlataforma, 1, 2);
+//        Image img = new Image(getClass().getResourceAsStream("/imagens/exame.png"));
+//        ImageView iv = new ImageView(img);
 //
-//            gridFormulario.add(lblEstudio, 0, 3);
-//            gridFormulario.add(comboEstudio, 1, 3);
+//        iv.setFitWidth(40);
+//        iv.setFitHeight(40);
 //
-//            gridFormulario.add(lblCategoria, 0, 4);
-//            gridFormulario.add(comboCategoria, 1, 4);
+//        Label titulo = new Label("Cadastro de Plataforma");
+//        titulo.setStyle("-fx-font-size: 22; -fx-text-fill: white; -fx-font-weight: bold;");
 //
-//            gridFormulario.add(lblValor, 0, 5);
-//            gridFormulario.add(tfValor, 1, 5);
+//        painel.getChildren().addAll(iv, titulo);
 //
-//            gridFormulario.add(lblDatalancamento, 0, 6);
-//            gridFormulario.add(dpDataLacamento, 1, 6);
+//        return painel;
+//    }
 //
-//            gridFormulario.add(cbFinalizado, 1, 7);
+//    private VBox criarFormulario() {
 //
+//        VBox box = new VBox(10);
+//        box.setPadding(new Insets(20));
 //
+//        GridPane grid = new GridPane();
+//        grid.setHgap(10);
+//        grid.setVgap(10);
 //
-//            formulario.getChildren().add(gridFormulario);
+//        //  Campos
+//        Label lblId = new Label("ID:");
+//        tfId.setDisable(true);
 //
-//            return formulario;
-//        }
+//        Label lblNome = new Label("Nome:");
+//        tfNome.setPromptText("Ex: PlayStation 5");
 //
-//        private HBox criarPainelBotoes(Stage stage) {
-//            HBox painelBotoes = new HBox(10);
-//            painelBotoes.setStyle("-fx-background-color: #afafaf");
-//            painelBotoes.setPadding(new Insets(10));
-//            painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
+//        Label lblFabricante = new Label("Fabricante:");
+//        tfFabricante.setPromptText("Ex: Sony");
 //
-//            Button btnSalvar = new Button();
-//            Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/salve.png"));
-//            ImageView ivSalvar = new ImageView(imgSalvar);
-//            btnSalvar.setGraphic(ivSalvar);
-//            btnSalvar.setTooltip(new Tooltip("Salvar dados do jogo"));
+//        Label lblValor = new Label("Valor:");
+//        tfValor.setPromptText("Ex: 3999.99");
 //
-//            btnSalvar.setOnAction(evento -> {
-//                Jogo jogo = new Jogo();
-//                jogo.setTitulo(tfTitulo.getText());
-//                jogo.setPlataforma(comboPlataforma.getValue());
-//                jogo.setEstudio(comboEstudio.getValue());
-//                jogo.setDataLancamento(dpDataLacamento.getValue());
-//                jogo.setCategoria("Testando Categoria");
-//                jogo.setFinalizado(cbFinalizado.isSelected());
+//        Label lblData = new Label("Data de Lançamento:");
+//        dpDataLancamento.setValue(LocalDate.now());
 //
-//                try {
-//                    double preco = Double.parseDouble(tfValor.getText().replace(",","."));
-//                    jogo.setPreco(preco);
-//                } catch (NumberFormatException e) {
-//                    Alert valorIncorreto = new Alert(Alert.AlertType.ERROR);
-//                    valorIncorreto.setTitle("Valor Incorreto");
-//                    valorIncorreto.setHeaderText("O valor digitado deve conter apenas números! \n Utilize ponto como separador de decimal");
-//                    valorIncorreto.showAndWait();
-//                    tfValor.clear();
-//                    return;
-//                }
+//        //  Adicionar no grid
+//        grid.add(lblId, 0, 0);
+//        grid.add(tfId, 1, 0);
 //
+//        grid.add(lblNome, 0, 1);
+//        grid.add(tfNome, 1, 1);
 //
-//                //Criar o repositorio para enviar o jogo
-//                JogoRepository repository = new JogoRepository();
-//                if (tfId.getText().equals("")) {
-//                    repository.salvar(jogo);
+//        grid.add(lblFabricante, 0, 2);
+//        grid.add(tfFabricante, 1, 2);
 //
+//        grid.add(lblValor, 0, 3);
+//        grid.add(tfValor, 1, 3);
 //
-//                    // Mostrar a Mensagem pos salvar
+//        grid.add(lblData, 0, 4);
+//        grid.add(dpDataLancamento, 1, 4);
 //
-//                    Alert mensagemSalvar = new Alert(Alert.AlertType.CONFIRMATION);
-//                    mensagemSalvar.setTitle("Cadastro jogo");
-//                    mensagemSalvar.setHeaderText("O jogo foi gravado com sucesso!");
-//                    mensagemSalvar.setContentText("Deseja Cadastro outro jogo?");
+//        box.getChildren().add(grid);
 //
-//                    Optional<ButtonType> escolha = mensagemSalvar.showAndWait();// chamar mensagem a cima
+//        return box;
+//    }
 //
-//                    if(escolha.get() == ButtonType.OK) {
-//                        limparCampos();
-//                    } else{
-//                        stage.close();
-//                    }
+//    private HBox criarPainelBotoes(Stage stage) {
 //
+//        HBox box = new HBox(10);
+//        box.setPadding(new Insets(10));
+//        box.setAlignment(Pos.CENTER_RIGHT);
 //
-//                } else {
-//                    jogo.setId(Integer.parseInt(tfId.getText()));
-//                    repository.editar(jogo);
+//        Button btnSalvar = new Button("Salvar");
+//        Button btnCancelar = new Button("Cancelar");
 //
-//                    Alert mensagemEditar = new Alert(Alert.AlertType.INFORMATION);
-//                    mensagemEditar.setTitle("Atualização de jogo");
-//                    mensagemEditar.setHeaderText("O jogo foi atualizado com sucesso!");
+//        btnSalvar.setOnAction(e -> {
 //
-//                    mensagemEditar.showAndWait();
-//                    stage.close();
-//                }
+//            Plataforma plataforma = new Plataforma();
 //
+//            plataforma.setNome(tfNome.getText());
+//            plataforma.setFabricante(tfFabricante.getText());
+//            plataforma.setDataLancamento(dpDataLancamento.getValue());
 //
-//                // Mostrar a mensagem pós editar
+//            try {
+//                double valor = Double.parseDouble(tfValor.getText().replace(",", "."));
+//                plataforma.setValor(valor);
+//            } catch (NumberFormatException erro) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setHeaderText("Valor inválido!");
+//                alert.setContentText("Digite apenas números no campo valor.");
+//                alert.showAndWait();
+//                return;
+//            }
 //
-////            JOptionPane.showMessageDialog(
-////                    null,
-////                    "Jogo cadastrado com sucesso!",
-////                    "Erro",
-////                    JOptionPane.ERROR_MESSAGE
-////            );
+//            Alert ok = new Alert(Alert.AlertType.INFORMATION);
+//            ok.setHeaderText("Plataforma salva com sucesso!");
+//            ok.showAndWait();
 //
+//            stage.close();
+//        });
 //
-//            });
+//        btnCancelar.setOnAction(e -> stage.close());
 //
-//            Button btnCancelar = new Button();
-//            Image imgCancelar = new Image(getClass().getResourceAsStream("/imagens/cancelar.png"));
-//            ImageView ivCancelar = new ImageView(imgCancelar);
-//            btnCancelar.setGraphic(ivCancelar);
-//            btnCancelar.setTooltip(new Tooltip("Cancelar dados do jogo"));
+//        box.getChildren().addAll(btnSalvar, btnCancelar);
 //
-//            painelBotoes.getChildren().addAll(btnSalvar, btnCancelar);
-//
-//            return painelBotoes;
-//        }
-//
-//        private void limparCampos() {
-//
-//            tfTitulo.clear();
-//            comboCategoria.setValue("");
-//            tfValor.clear();
-//            comboEstudio.setValue("");
-//            comboPlataforma.setValue("");
-//            cbFinalizado.setSelected(false);
-//            dpDataLacamento.setValue(LocalDate.now());
-//            tfTitulo.requestFocus();
-//        }
-//
+//        return box;
 //    }
 //}

@@ -92,6 +92,7 @@ public class PainelPlataforma {
         Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
 
 
+
         Button btnEditar = criarBotao("Editar", "/imagens/editar.png");
         Button btnExibir = criarBotao("Exibir", "/imagens/visualizar.png");
         Button bntExcluir = criarBotao("Excluir","/imagens/excluir.png");
