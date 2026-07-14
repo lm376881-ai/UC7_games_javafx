@@ -1,9 +1,15 @@
 package br.senac.sp.gamesfx;
 
 import br.senac.sp.gamesfx.ui.home.PainelHome;
+<<<<<<< HEAD
 import br.senac.sp.gamesfx.ui.jogos.PainelEstudio;
 import br.senac.sp.gamesfx.ui.jogos.PainelJogos;
 import br.senac.sp.gamesfx.ui.jogos.PainelPlataforma;
+=======
+import br.senac.sp.gamesfx.ui.home.PainelEstudio;
+import br.senac.sp.gamesfx.ui.home.PainelJogos;
+import br.senac.sp.gamesfx.ui.home.PainelPlataforma;
+>>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,8 +18,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class TelaPrincipal extends Application {
 
@@ -42,6 +46,7 @@ public class TelaPrincipal extends Application {
 
         Button btnPlataformas = criarBotaoMenu("Plataformas");
         btnPlataformas.setOnAction(clique -> {
+<<<<<<< HEAD
             PainelPlataforma painel = new PainelPlataforma(stage);
             raiz.setCenter(painel.criarPainelPLataforma());
         });
@@ -56,6 +61,21 @@ public class TelaPrincipal extends Application {
 
         Button btnHome = criarBotaoMenu("Home");
         btnHome.setOnAction(clique -> {
+=======
+            PainelPlataforma painelPlataforma = new PainelPlataforma(stage);
+            raiz.setCenter(painelPlataforma.criarPainelPLataforma());
+        });
+
+        Button btnEstudios = criarBotaoMenu("Estudios");
+             btnEstudios.setOnAction( clique ->{
+                PainelEstudio painelEstudio = new PainelEstudio(stage);
+                raiz.setCenter(painelEstudio.criarPainelEstudio());
+            });
+
+
+        Button btnHome = criarBotaoMenu("Home");
+        btnHome.setOnAction(clique ->{
+>>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
             PainelHome painelHome = new PainelHome();
             raiz.setCenter(painelHome.criarPainelHome());
         });
@@ -120,6 +140,7 @@ public class TelaPrincipal extends Application {
         }
 
     }
+
 
 
 }

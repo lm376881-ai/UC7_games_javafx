@@ -4,11 +4,19 @@ import java.time.LocalDate;
 
 public class Plataforma {
 
+<<<<<<< HEAD
     private int id;
     private String nome;
     private String fabricante;
     private LocalDate dataLancamento;
     private double valor;
+=======
+        private int id;
+        private String nome;
+        private String fabricante;
+        private LocalDate dataLancamento;
+        private double valor;
+>>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
 
     public boolean isFinalizado() {
         return finalizado;

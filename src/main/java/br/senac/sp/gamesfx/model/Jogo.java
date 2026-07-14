@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 public class Jogo {
 
-    // private é o encapsuplamento dos objetos só  pondendo ser chamado\alterardo na classe jogo
-
-    // propriedade/atributo de uma classe
+    //Propriedades de uma Classe
     private int id;
     private String titulo;
     private String plataforma;
@@ -23,9 +21,15 @@ public class Jogo {
     }
 
     //Construtor Default/Padrão
+<<<<<<< HEAD
     public Jogo(){}
 
 
+=======
+    public Jogo(){
+
+    }
+>>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
 
     public int getId() {
         return id;
