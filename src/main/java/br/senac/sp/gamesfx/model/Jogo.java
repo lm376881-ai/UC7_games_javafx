@@ -11,17 +11,21 @@ public class Jogo {
     private String titulo;
     private String plataforma;
     private String categoria;
-    private String  estudio;
+    private String estudio;
     private double preco;
     private LocalDate dataLancamento;
     private boolean finalizado;
-// termino da propriedade
 
-    public Jogo(int id, String titulo, String plataforma){
+    public  Jogo(int id, String titulo, String plataforma){
         this.id = id;
         this.titulo = titulo;
         this.plataforma = plataforma;
     }
+
+    //Construtor Default/Padrão
+    public Jogo(){}
+
+
 
     public int getId() {
         return id;
@@ -36,7 +40,6 @@ public class Jogo {
     }
 
     public void setTitulo(String titulo) {
-
         this.titulo = titulo;
     }
 
@@ -69,6 +72,7 @@ public class Jogo {
     }
 
     public void setPreco(double preco) {
+
         this.preco = preco;
     }
 
@@ -87,4 +91,6 @@ public class Jogo {
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
+
+
 }
