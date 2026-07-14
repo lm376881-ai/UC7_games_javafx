@@ -121,32 +121,15 @@ public class PainelEstudio {
         });
 
         Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
-//
-        Estudio excluirEstudio = tabelaEstudios.getSelectionModel().getSelectedItem();
-
         btnExcluir.setOnAction(event -> {
+
+            Estudio excluirEstudio =
+                    tabelaEstudios.getSelectionModel().getSelectedItem();
+
             if (excluirEstudio == null) {
-                Alert alertaJogoNaoSelecionado = new Alert(Alert.AlertType.WARNING);
-                alertaJogoNaoSelecionado.setTitle("Exclusão de Plataforma");
-                alertaJogoNaoSelecionado.setHeaderText("Para excluir uma plataforma você deve selecioná-lo na lista.");
-                alertaJogoNaoSelecionado.showAndWait();
-                return;
             }
-            Alert confirmaExclusao = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmaExclusao.setTitle("Exclusão de Plataforma");
-            confirmaExclusao.setHeaderText("Você está prestes a excluir uma plataforma.");
-            confirmaExclusao.setContentText("Tem certeza que deseja continuar?");
-
-            Optional<ButtonType> resposta = confirmaExclusao.showAndWait();
-            ButtonType botaoSelecionado = resposta.get();
-
-            if (botaoSelecionado == ButtonType.OK) {
-                EstudioRepository.excluir(excluirEstudio.getId());
-
-                tabelaEstudios.setItems(EstudioRepository.getEstudios());
-            }
-
         });
+
         //Adicionar o label no painel
         painelEstudio.getChildren().addAll(lblTitulo, linha, tabelaEstudios, painelBotoes);
 
