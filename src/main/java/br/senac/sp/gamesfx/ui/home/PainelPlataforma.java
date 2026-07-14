@@ -1,7 +1,5 @@
-package br.senac.sp.gamesfx.ui.jogos;
+package br.senac.sp.gamesfx.ui.home;
 
-import br.senac.sp.gamesfx.data.repository.JogoRepository;
-import br.senac.sp.gamesfx.model.Jogo;
 import br.senac.sp.gamesfx.model.Plataforma;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +20,7 @@ public class PainelPlataforma {
     private Stage stage;
 
     public PainelPlataforma(Stage stage) {
-
+    this.stage = stage;
     }
 
     public VBox criarPainelPLataforma() {

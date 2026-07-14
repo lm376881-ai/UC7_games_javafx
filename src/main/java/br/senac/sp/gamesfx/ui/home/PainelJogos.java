@@ -1,7 +1,8 @@
-package br.senac.sp.gamesfx.ui.jogos;
+package br.senac.sp.gamesfx.ui.home;
 
 import br.senac.sp.gamesfx.data.repository.JogoRepository;
 import br.senac.sp.gamesfx.model.Jogo;
+import br.senac.sp.gamesfx.ui.jogos.TelaJogo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -21,7 +22,7 @@ public class PainelJogos {
     private Stage stage;
 
     public PainelJogos(Stage stage ){
-
+    this.stage = stage;
     }
 
     public VBox criarPainelJogos() {

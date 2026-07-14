@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 public class EstudioRepository {
-    public ObservableList<Estudio> getEstudios() {
+    public static ObservableList<Estudio> getEstudios() {
 
         String sql = "SELECT * FROM  tb_estudios";
 
@@ -88,7 +88,7 @@ public class EstudioRepository {
     }
 
 
-    private int excluir(int id) {
+    public static int excluir(int id) {
         String sql = "DELETE FROM tb_estudios WHERE id = ?";
         try {
             PreparedStatement stm = ConexaoSQLite
