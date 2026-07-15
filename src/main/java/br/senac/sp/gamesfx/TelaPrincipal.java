@@ -66,11 +66,6 @@ public class TelaPrincipal extends Application {
                 btnEstudios
         );
 
-//        paineilLateral.getChildren().add(btnJogos);
-//        paineilLateral.getChildren().add(btnPlataformas);
-//        paineilLateral.getChildren().add(btnEstudios);
-//        paineilLateral.getChildren().add(btnHome);
-
         raiz.setLeft(painelLateral);
         raiz.setStyle("-fx-background-color: #ffffff");
 
