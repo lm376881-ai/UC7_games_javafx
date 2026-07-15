@@ -11,7 +11,7 @@ public class ConexaoSQLite {
     public static Connection getConexao(){
 
         //String de conexão - URl do Banco de Dados
-        String url = "jdbc:sqlite:/C:/Users/lucas.mnascimento25/banco_de_dados/db_games";
+        String url = "jdbc:sqlite:/C:/Users/lucas.mnascimento25/banco_de_dados/db_games.db";
 
         try {
             conexao = DriverManager.getConnection(url);

@@ -2,7 +2,6 @@ package br.senac.sp.gamesfx.ui.jogos;
 
 import br.senac.sp.gamesfx.data.repository.JogoRepository;
 import br.senac.sp.gamesfx.model.Jogo;
-import br.senac.sp.gamesfx.ui.jogos.TelaJogo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -21,7 +20,7 @@ public class PainelJogos {
 
     private Stage stage;
 
-    public PainelJogos(Stage stage ){
+    public PainelJogos(Stage stage) {
         this.stage = stage;
     }
 
@@ -29,30 +28,20 @@ public class PainelJogos {
 
         VBox painelJogos = new VBox();
         painelJogos.setStyle("-fx-background-color:#aaaaaa;-fx-font-size: 12");
-        painelJogos.setPadding(new Insets(10,10,10,10)); // comando utilizado para redimencionar Vbox do painel jogos
+        painelJogos.setPadding(new Insets(10, 10, 10, 10));
 
-        // Titulo Painel de Jogos
-
-        Label lblTitulo =  new Label("Listagem de jogos!");
+        // Título
+        Label lblTitulo = new Label("Listagem de jogos!");
         lblTitulo.setStyle("-fx-font-size: 24; -fx-text-fill: #ffffff; -fx-font-weight: bold");
-
-        // Linha abaixo do label
 
         Separator linha = new Separator();
 
-        // Tabela com uma lista de jogos
-
-        TableView<Jogo>  tabelaJogos = new TableView<>();
-
-
-        // Ajustar tamanho de tabela para ocupar todo o espaço
+        // Tabela
+        TableView<Jogo> tabelaJogos = new TableView<>();
 
         VBox.setVgrow(tabelaJogos, Priority.ALWAYS);
 
-
-
-        // Criar Colunas da tabela
-
+        // Colunas
         TableColumn<Jogo, Integer> colunaId = new TableColumn<>("ID");
         colunaId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colunaId.setPrefWidth(40);
@@ -85,107 +74,133 @@ public class PainelJogos {
         colunaFinalizado.setCellValueFactory(new PropertyValueFactory<>("finalizado"));
         colunaFinalizado.setPrefWidth(80);
 
+        tabelaJogos.getColumns().addAll(
+                colunaId,
+                colunaTitulo,
+                colunaPlataforma,
+                colunaCategoria,
+                colunaEstudio,
+                colunaPreco,
+                colunaDataLancamento,
+                colunaFinalizado
+        );
 
-        // Adicionar Colunas a tabela
-
-        tabelaJogos.getColumns().addAll(colunaId, colunaTitulo, colunaPlataforma, colunaCategoria, colunaEstudio, colunaPreco, colunaDataLancamento, colunaFinalizado);
-
-
-        // Obter os dados que serão exibidos
-
+        // Repositório
         JogoRepository repository = new JogoRepository();
-
-        // Adiciona a lista de jogos na tabela
 
         tabelaJogos.setItems(repository.getJogos());
 
-        // Criar painel de botões de ação
-
-        // Criar botões de ações
+        // Painel de botões
         HBox painelBotoes = new HBox(10);
+        painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
 
-        Button btnAdicionar = criarBotao("Adicionar", "/imagens/cancelar.png");
+        // Botão Adicionar
+        Button btnAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
+
         btnAdicionar.setOnAction(e -> {
             TelaJogo telaJogo = new TelaJogo();
-            telaJogo.criarTela(stage);
+            telaJogo.criarTela(new Stage());
             tabelaJogos.setItems(repository.getJogos());
-
         });
 
-        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
-        btnExcluir.setOnAction(event -> {
-            Jogo jogoExcluir = tabelaJogos.getSelectionModel().getSelectedItem();
-            int resultado = repository.excluir(jogoExcluir.getId());
+        // Botão Editar
+        Button btnEditar = criarBotao("Editar", "/imagens/editar.png");
 
-            if (resultado > 0) {
+        btnEditar.setOnAction(e -> {
 
-                JOptionPane.showMessageDialog(null, "Jogo excluído com sucesso!");
-                tabelaJogos.setItems(repository.getJogos());
+            Jogo jogoEditar = tabelaJogos.getSelectionModel().getSelectedItem();
 
+            if (jogoEditar == null) {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Editar Jogo");
+                alerta.setHeaderText("Selecione um jogo para editar.");
+                alerta.showAndWait();
+                return;
             }
 
+            TelaJogo telaJogo = new TelaJogo(jogoEditar);
+            telaJogo.criarTela(stage);
+
+            tabelaJogos.setItems(repository.getJogos());
         });
+
+        // Botão Visualizar
         Button btnExibir = criarBotao("Visualizar", "/imagens/visualizar.png");
+
         btnExibir.setOnAction(event -> {
 
             Jogo visualizarJogo = tabelaJogos.getSelectionModel().getSelectedItem();
 
-            if (visualizarJogo == null){
-                Alert alertaJogoNaoSelecionado = new Alert(Alert.AlertType.WARNING);
+            if (visualizarJogo == null) {
+                Alert alertaJogoNaoSelecionado =
+                        new Alert(Alert.AlertType.WARNING);
+
                 alertaJogoNaoSelecionado.setTitle("Visualização de Jogo");
-                alertaJogoNaoSelecionado.setHeaderText("Para visualizar um jogo você deve selecioná-lo na lista.");
+                alertaJogoNaoSelecionado.setHeaderText(
+                        "Para visualizar um jogo você deve selecioná-lo na lista."
+                );
                 alertaJogoNaoSelecionado.showAndWait();
                 return;
             }
 
             TelaJogo telaJogo = new TelaJogo(visualizarJogo);
             telaJogo.criarTela(stage);
-
         });
 
+        // Botão Excluir
+        Button btnExcluir = criarBotao("Excluir", "/imagens/excluir.png");
 
-        Button bntEditar = criarBotao("Editar", "/imagens/editar.png");
-        bntEditar.setOnAction(e ->{
-            Jogo jogoEditar = tabelaJogos.getSelectionModel().getSelectedItem();
-            TelaJogo telaJogo = new TelaJogo(jogoEditar);
-            telaJogo.criarTela(stage);
-            tabelaJogos.setItems(repository.getJogos()); // atulizar jogo após edição
+        btnExcluir.setOnAction(event -> {
+
+            Jogo jogoExcluir = tabelaJogos.getSelectionModel().getSelectedItem();
+
+            if (jogoExcluir == null) {
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Excluir Jogo");
+                alerta.setHeaderText("Selecione um jogo para excluir.");
+                alerta.showAndWait();
+                return;
+            }
+
+            int resultado = repository.excluir(jogoExcluir.getId());
+
+            if (resultado > 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Jogo excluído com sucesso!"
+                );
+
+                tabelaJogos.setItems(repository.getJogos());
+            }
         });
 
+        painelBotoes.getChildren().addAll(
+                btnAdicionar,
+                btnEditar,
+                btnExibir,
+                btnExcluir
+        );
 
-        painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
-
-
-        //Criar os botões
-
-        Button bntAdicionar = criarBotao("Adicionar", "/imagens/adicionar.png");
-        bntAdicionar.setOnAction(e -> {
-            TelaJogo telaJogo = new TelaJogo();
-            telaJogo.criarTela(new Stage ());
-            tabelaJogos.setItems(repository.getJogos());
-        });
-
-
-
-        painelBotoes.getChildren().addAll(bntAdicionar, bntEditar, btnExibir, btnExcluir); // chamar os botôes criados
-
-
-
-        // Adicionar o label no painel
-
-        painelJogos.getChildren().addAll(lblTitulo, linha, tabelaJogos, painelBotoes);
-
-
+        painelJogos.getChildren().addAll(
+                lblTitulo,
+                linha,
+                tabelaJogos,
+                painelBotoes
+        );
 
         return painelJogos;
     }
 
     private Button criarBotao(String textoBotao, String urlImagem) {
-        Image image = new Image(getClass().getResourceAsStream(urlImagem));
+
+        Image image =
+                new Image(getClass().getResourceAsStream(urlImagem));
+
         ImageView imageView = new ImageView(image);
 
         imageView.setFitWidth(20);
         imageView.setFitHeight(20);
+
         Button button = new Button();
         button.setPrefWidth(110);
         button.setPrefHeight(50);
@@ -193,5 +208,5 @@ public class PainelJogos {
         button.setGraphic(imageView);
 
         return button;
-        }
     }
+}
