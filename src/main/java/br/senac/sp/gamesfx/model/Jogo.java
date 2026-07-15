@@ -21,15 +21,10 @@ public class Jogo {
     }
 
     //Construtor Default/Padrão
-<<<<<<< HEAD
-    public Jogo(){}
-
-
-=======
     public Jogo(){
 
     }
->>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
+
 
     public int getId() {
         return id;

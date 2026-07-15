@@ -1,18 +1,9 @@
-
 package br.senac.sp.gamesfx.data.repository;
 
 import br.senac.sp.gamesfx.data.ConexaoSQLite;
-<<<<<<< HEAD
 import br.senac.sp.gamesfx.model.Plataforma;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-=======
-import br.senac.sp.gamesfx.model.Jogo;
-import br.senac.sp.gamesfx.model.Plataforma;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
->>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -129,10 +120,7 @@ public class PlataformaRepository {
         } catch (SQLException erro) {
             System.out.println("Ocorreu um erro na gravação.");
             erro.printStackTrace();
-<<<<<<< HEAD
         }
-=======
-            }
->>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
+
     }
 }

@@ -4,31 +4,15 @@ import java.time.LocalDate;
 
 public class Plataforma {
 
-<<<<<<< HEAD
     private int id;
     private String nome;
     private String fabricante;
     private LocalDate dataLancamento;
     private double valor;
-=======
-        private int id;
-        private String nome;
-        private String fabricante;
-        private LocalDate dataLancamento;
-        private double valor;
->>>>>>> a62e25edc39768ec657550d5496abcf39667a9f3
-
-    public boolean isFinalizado() {
-        return finalizado;
-    }
-
-    public void setFinalizado(boolean finalizado) {
-        this.finalizado = finalizado;
-    }
-
     private boolean finalizado;
 
-    public Plataforma (int id, String nome, String fabricante, LocalDate dataLancamento, double valor) {
+    public Plataforma(int id, String nome, String fabricante,
+                      LocalDate dataLancamento, double valor) {
         this.id = id;
         this.nome = nome;
         this.fabricante = fabricante;
@@ -36,12 +20,10 @@ public class Plataforma {
         this.valor = valor;
     }
 
-    public Plataforma (){
-
+    public Plataforma() {
     }
 
     public int getId() {
-
         return id;
     }
 
@@ -52,6 +34,7 @@ public class Plataforma {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -59,6 +42,7 @@ public class Plataforma {
     public String getFabricante() {
         return fabricante;
     }
+
     public void setFabricante(String fabricante) {
         this.fabricante = fabricante;
     }
@@ -66,6 +50,7 @@ public class Plataforma {
     public LocalDate getDataLancamento() {
         return dataLancamento;
     }
+
     public void setDataLancamento(LocalDate dataLancamento) {
         this.dataLancamento = dataLancamento;
     }
@@ -73,9 +58,16 @@ public class Plataforma {
     public double getValor() {
         return valor;
     }
+
     public void setValor(double valor) {
         this.valor = valor;
     }
 
-}
+    public boolean isFinalizado() {
+        return finalizado;
+    }
 
+    public void setFinalizado(boolean finalizado) {
+        this.finalizado = finalizado;
+    }
+}
