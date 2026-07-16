@@ -22,6 +22,7 @@ public class EstudioRepository {
             while (rs.next()) {
                 Estudio estudio = new Estudio();
                 int id = rs.getInt("id");
+                String nomeEstudio = rs.getNString("nomeEstudio");
                 String nomeFundador = rs.getString("nomeFundador");
                 int anoFundacao = rs.getInt("anoFundacao");
                 String paisOrigem = rs.getString("paisOrigem");
@@ -29,6 +30,7 @@ public class EstudioRepository {
                 // popular dados estudio
 
                 estudio.setId(id);
+                estudio.setNomeEstudio(nomeEstudio);
                 estudio.setNomeFundador(nomeFundador);
                 estudio.setAnoFundacao(anoFundacao);
                 estudio.setPaisOrigem(paisOrigem);
@@ -50,14 +52,16 @@ public class EstudioRepository {
     public int salvar(Estudio estudio) {
         // instrução SQL para cadastrar uma plataforma no banco de dados
 
-        String sql = "INSERT INTO tb_estudios (nomeFundador, anoFundacao, paisOrigem) " +
-                "VALUES (?, ?, ?);";
+        String sql = "INSERT INTO tb_estudios (nomeEstudio, nomeFundador, anoFundacao, paisOrigem)" +
+                "VALUES (?, ?, ?, ?);";
         try {
             PreparedStatement stmt = ConexaoSQLite.getConexao().prepareStatement(sql);
 
             stmt.setString(1, estudio.getNomeFundador());
-            stmt.setInt(2, estudio.getAnoFundacao());
+            stmt.setString(2, estudio.getNomeEstudio());
             stmt.setString(3, estudio.getPaisOrigem());
+            stmt.setInt(4, estudio.getAnoFundacao());
+
 
 
             int resultado = stmt.executeUpdate();
@@ -109,15 +113,17 @@ public class EstudioRepository {
     public void editar(Estudio estudio) {
         String sql = "UPDATE tb_estudios SET " +
                 "nomeFundador= ?, " +
+                "nomeEstudio= ?," +
                 "anoFundacao= ?," +
                 "paisOrigem = ? "+
                 "WHERE id = ?";
         try {
             PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
             stm.setString(1, estudio.getNomeFundador());
-            stm.setInt(2, estudio.getAnoFundacao());
-            stm.setString(3, estudio.getPaisOrigem());
-            stm.setInt(4, estudio.getId());
+            stm.setString(2, estudio.getNomeEstudio());
+            stm.setInt(3, estudio.getAnoFundacao());
+            stm.setString(4, estudio.getPaisOrigem());
+            stm.setInt(5, estudio.getId());
             stm.executeUpdate();
             ConexaoSQLite.fecharConexao();
 

@@ -1,5 +1,5 @@
 package br.senac.sp.gamesfx.ui.jogos;
-
+import br.senac.sp.gamesfx.data.repository.PlataformaRepository;
 import br.senac.sp.gamesfx.model.Plataforma;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,7 +24,8 @@ public class TelaPlataforma {
     private DatePicker dpDataLancamento = new DatePicker();
 
 
-    public TelaPlataforma(){}
+    public TelaPlataforma() {
+    }
 
 
     public TelaPlataforma(Plataforma plataforma) {
@@ -128,7 +129,6 @@ public class TelaPlataforma {
         box.setAlignment(Pos.CENTER_RIGHT);
 
         Button btnSalvar = new Button("Salvar");
-        Button btnCancelar = new Button("Cancelar");
 
         btnSalvar.setOnAction(e -> {
 
@@ -139,26 +139,66 @@ public class TelaPlataforma {
             plataforma.setDataLancamento(dpDataLancamento.getValue());
 
             try {
-                double valor = Double.parseDouble(tfValor.getText().replace(",", "."));
+
+                double valor =
+                        Double.parseDouble(
+                                tfValor.getText().replace(",", ".")
+                        );
+
                 plataforma.setValor(valor);
+
+                PlataformaRepository repository =
+                        new PlataformaRepository();
+
+                // EDITAR
+                if (!tfId.getText().isEmpty()) {
+
+                    plataforma.setId(
+                            Integer.parseInt(tfId.getText())
+                    );
+
+                    repository.editar(plataforma);
+
+                }
+                // NOVO CADASTRO
+                else {
+
+                    repository.salvar(plataforma);
+
+                }
+
+                Alert ok =
+                        new Alert(Alert.AlertType.INFORMATION);
+
+                ok.setTitle("Sucesso");
+                ok.setHeaderText("Operação realizada com sucesso!");
+
+                ok.showAndWait();
+
+                stage.close();
+
             } catch (NumberFormatException erro) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                Alert alert =
+                        new Alert(Alert.AlertType.ERROR);
+
+                alert.setTitle("Erro");
                 alert.setHeaderText("Valor inválido!");
-                alert.setContentText("Digite apenas números no campo valor.");
+                alert.setContentText(
+                        "Digite apenas números no campo valor."
+                );
+
                 alert.showAndWait();
-                return;
             }
-
-            Alert ok = new Alert(Alert.AlertType.INFORMATION);
-            ok.setHeaderText("Plataforma salva com sucesso!");
-            ok.showAndWait();
-
-            stage.close();
         });
 
+        Button btnCancelar = new Button("Cancelar");
         btnCancelar.setOnAction(e -> stage.close());
 
-        box.getChildren().addAll(btnSalvar, btnCancelar);
+        box.getChildren().addAll(
+                btnSalvar,
+                btnCancelar
+        );
 
         return box;
     }

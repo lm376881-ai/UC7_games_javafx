@@ -2,7 +2,6 @@ package br.senac.sp.gamesfx.ui.jogos;
 
 import br.senac.sp.gamesfx.data.repository.EstudioRepository;
 import br.senac.sp.gamesfx.model.Estudio;
-import br.senac.sp.gamesfx.ui.jogos.TelaEstudio;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -12,9 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
-import java.util.Optional;
+
 
 public class PainelEstudio {
     public Stage stage;

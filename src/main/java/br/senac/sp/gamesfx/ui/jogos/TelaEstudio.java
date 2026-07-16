@@ -24,7 +24,6 @@ public class TelaEstudio {
     private TextField tfId = new TextField();
     private TextField tfNomeEstudio = new TextField();
     private  TextField tfNomeFundador = new TextField();
-    private ComboBox<Estudio> comboEstudio = new ComboBox<>();
     private DatePicker dpAnoFundacao = new DatePicker();
     private TextField tfPaisOrigem = new TextField();
 
@@ -32,6 +31,7 @@ public class TelaEstudio {
         tfId.setText(String.valueOf(estudio.getId()));
         tfNomeEstudio.setText(estudio.getNomeEstudio());
         tfNomeFundador.setText(estudio.getNomeFundador());
+      //  tfEstudio.setText(estudio.getNomeEstudio());
         dpAnoFundacao.setValue(LocalDate.of(estudio.getAnoFundacao(),1,1));
         tfPaisOrigem.setText(estudio.getPaisOrigem());
     }
@@ -69,7 +69,7 @@ public class TelaEstudio {
         painelTitulo.setStyle("-fx-background-color:#676767; ");
         painelTitulo.setAlignment(Pos.CENTER_LEFT);
 
-        Image image = new Image(getClass().getResourceAsStream("/imagens/icons/binoculars2.png"));
+        Image image = new Image(getClass().getResourceAsStream("/imagens/exame.png"));
         ImageView imageView = new ImageView(image);
 
         imageView.setFitWidth(40);
@@ -105,10 +105,8 @@ public class TelaEstudio {
         Label lblFundador = new Label("Fundador: ");
         tfNomeFundador.setPromptText("Ex: Sam Houser e Dan Houser");
 
-        Label lblNomeEstudio = new Label("Nome do Estudio:");
-
         Label lblEstudio = new Label("Estudios: ");
-        comboEstudio.setItems(estudios);
+        tfNomeEstudio.setPromptText("Ex: Rockstar Games");
 
         Label lblPaisOrigem = new Label("País de Origem: ");
         tfPaisOrigem.setPromptText("Ex: Bulgária");
@@ -121,14 +119,14 @@ public class TelaEstudio {
         gridFormulario.add(lblEstudioId,0,0);
         gridFormulario.add(tfId,1,0);
 
-        gridFormulario.add(lblNomeEstudio,0,1);
-        gridFormulario.add(tfNomeEstudio,1,1);
+       // gridFormulario.add(lblNomeEstudio,0,1);
+       // gridFormulario.add(tfNomeEstudio,1,1);
 
         gridFormulario.add(lblFundador,0,2);
         gridFormulario.add(tfNomeFundador,1,2);
 
         gridFormulario.add(lblEstudio,0,3);
-        gridFormulario.add(comboEstudio,1,3);
+        gridFormulario.add(tfNomeEstudio,1,3);
 
         gridFormulario.add(lblPaisOrigem,0,4);
         gridFormulario.add(tfPaisOrigem,1,4);
@@ -148,7 +146,7 @@ public class TelaEstudio {
         painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button btnSalvar = new Button();
-        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/icons/save.png"));
+        Image imgSalvar = new Image(getClass().getResourceAsStream("/imagens/salve.png"));
         ImageView ivSalvar = new ImageView(imgSalvar);
         btnSalvar.setGraphic(ivSalvar);
         btnSalvar.setTooltip(new Tooltip("Salvar dados do estudio"));
@@ -202,7 +200,7 @@ public class TelaEstudio {
         });
 
         Button btnCancelar = new Button();
-        Image imgCancelar = new Image(getClass().getResourceAsStream("/imagens/icons/cancel.png"));
+        Image imgCancelar = new Image(getClass().getResourceAsStream("/imagens/cancelar.png"));
         ImageView ivCancelar = new ImageView(imgCancelar);
         btnCancelar.setGraphic(ivCancelar);
         btnCancelar.setTooltip(new Tooltip("Cancelar dados do estúdio"));
