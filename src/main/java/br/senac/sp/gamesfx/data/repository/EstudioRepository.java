@@ -57,10 +57,10 @@ public class EstudioRepository {
         try {
             PreparedStatement stmt = ConexaoSQLite.getConexao().prepareStatement(sql);
 
-            stmt.setString(1, estudio.getNomeFundador());
-            stmt.setString(2, estudio.getNomeEstudio());
-            stmt.setString(3, estudio.getPaisOrigem());
-            stmt.setInt(4, estudio.getAnoFundacao());
+            stmt.setString(1, estudio.getNomeEstudio());
+            stmt.setString(2, estudio.getNomeFundador());
+            stmt.setInt(3, estudio.getAnoFundacao());
+            stmt.setString(4, estudio.getPaisOrigem());
 
 
 
