@@ -22,18 +22,18 @@ public class EstudioRepository {
             while (rs.next()) {
                 Estudio estudio = new Estudio();
                 int id = rs.getInt("id");
-                String nomeEstudio = rs.getNString("nomeEstudio");
+                String nomeEstudio = rs.getString("nomeEstudio");
                 String nomeFundador = rs.getString("nomeFundador");
                 int anoFundacao = rs.getInt("anoFundacao");
                 String paisOrigem = rs.getString("paisOrigem");
 
                 // popular dados estudio
 
-                estudio.setId(id);
-                estudio.setNomeEstudio(nomeEstudio);
-                estudio.setNomeFundador(nomeFundador);
-                estudio.setAnoFundacao(anoFundacao);
-                estudio.setPaisOrigem(paisOrigem);
+               estudio.setId(id);
+               estudio.setNomeEstudio(nomeEstudio);
+               estudio.setNomeFundador(nomeFundador);
+               estudio.setAnoFundacao(anoFundacao);
+               estudio.setPaisOrigem(paisOrigem);
 
                 listaEstudios.add(estudio);
 
@@ -61,6 +61,11 @@ public class EstudioRepository {
             stmt.setString(2, estudio.getNomeFundador());
             stmt.setInt(3, estudio.getAnoFundacao());
             stmt.setString(4, estudio.getPaisOrigem());
+
+//            System.out.println("NomeEstudio: " + estudio.getNomeEstudio());
+//            System.out.println("NomeFundador: " + estudio.getNomeFundador());
+//            System.out.println("AnoFundacao: " + estudio.getAnoFundacao());
+//            System.out.println("PaisOrigem: " + estudio.getPaisOrigem());
 
 
 
@@ -111,25 +116,27 @@ public class EstudioRepository {
     }
 
     public void editar(Estudio estudio) {
-        String sql = "UPDATE tb_estudios SET " +
-                "nomeFundador= ?, " +
-                "nomeEstudio= ?," +
-                "anoFundacao= ?," +
-                "paisOrigem = ? "+
-                "WHERE id = ?";
-        try {
-            PreparedStatement stm = ConexaoSQLite.getConexao().prepareStatement(sql);
+
+        String sql =
+                "UPDATE tb_estudios SET " +
+                        "nomeFundador = ?, " +
+                        "nomeEstudio = ?, " +
+                        "anoFundacao = ?, " +
+                        "paisOrigem = ? " +
+                        "WHERE id = ?";
+
+        try { PreparedStatement stm =  ConexaoSQLite.getConexao().prepareStatement(sql);
+
             stm.setString(1, estudio.getNomeFundador());
             stm.setString(2, estudio.getNomeEstudio());
             stm.setInt(3, estudio.getAnoFundacao());
             stm.setString(4, estudio.getPaisOrigem());
             stm.setInt(5, estudio.getId());
-            stm.executeUpdate();
-            ConexaoSQLite.fecharConexao();
 
-        } catch (SQLException erro) {
-            System.out.println("Ocorreu um erro na gravação.");
-            erro.printStackTrace();
+            stm.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

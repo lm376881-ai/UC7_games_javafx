@@ -2,7 +2,6 @@ package br.senac.sp.gamesfx.ui.jogos;
 
 import br.senac.sp.gamesfx.data.repository.EstudioRepository;
 import br.senac.sp.gamesfx.model.Estudio;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -66,7 +65,7 @@ public class TelaEstudio {
         HBox painelTitulo = new HBox();
 
         painelTitulo.setPadding(new Insets(20, 0, 20, 20));
-        painelTitulo.setStyle("-fx-background-color:#676767; ");
+        painelTitulo.setStyle("-fx-background-color:#9a9a9a;");
         painelTitulo.setAlignment(Pos.CENTER_LEFT);
 
         Image image = new Image(getClass().getResourceAsStream("/imagens/exame.png"));
@@ -86,9 +85,6 @@ public class TelaEstudio {
 
     private VBox criarFormularioEstudio(){
 
-        EstudioRepository estudioRepository = new EstudioRepository();
-
-        ObservableList<Estudio> estudios = estudioRepository.getEstudios();
 
         VBox formulario = new VBox();
         formulario.setPadding(new Insets(20));
@@ -96,7 +92,7 @@ public class TelaEstudio {
         GridPane gridFormulario = new GridPane(5,5);
         gridFormulario.setGridLinesVisible(false);
         gridFormulario.setPadding(new Insets(20));
-        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color: #2e2b68");
+        gridFormulario.setStyle("-fx-border-width: 2; " + "-fx-border-color: #676767; " + "-fx-border-radius: 32");
 
         //Criar os componentes que seram importados no grid
         Label lblEstudioId = new Label("ID:");
@@ -112,7 +108,9 @@ public class TelaEstudio {
         tfPaisOrigem.setPromptText("Ex: Bulgária");
 
         Label lblAnoFundacao = new Label("Ano de Fundação: ");
-        dpAnoFundacao = new DatePicker(LocalDate.now());
+        if (dpAnoFundacao.getValue() == null) {
+            dpAnoFundacao.setValue(LocalDate.now());
+        }
 
         //Adicionar os componentes no GRID
 
@@ -141,7 +139,7 @@ public class TelaEstudio {
     }
     private HBox criarPainelBotoes(Stage stage) {
         HBox painelBotoes = new HBox(10);
-        painelBotoes.setStyle("-fx-background-color: #676767");
+        painelBotoes.setStyle("-fx-background-color: #afafaf");
         painelBotoes.setPadding(new Insets(10));
         painelBotoes.setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -152,50 +150,121 @@ public class TelaEstudio {
         btnSalvar.setTooltip(new Tooltip("Salvar dados do estudio"));
         btnSalvar.setOnAction(event -> {
 
-
             Estudio estudio = new Estudio();
+
             estudio.setNomeEstudio(tfNomeEstudio.getText());
             estudio.setNomeFundador(tfNomeFundador.getText());
-            if (dpAnoFundacao.getValue()!= null){
-                estudio.setAnoFundacao(dpAnoFundacao.getValue().getYear());
+
+            if (dpAnoFundacao.getValue() != null) {
+                estudio.setAnoFundacao(
+                        dpAnoFundacao.getValue().getYear()
+                );
             }
+
             estudio.setPaisOrigem(tfPaisOrigem.getText());
 
+            EstudioRepository repository =
+                    new EstudioRepository();
 
-            //Criar o repositorio para enviar o plataforma
-            EstudioRepository repository = new EstudioRepository();
+            if (tfNomeEstudio.getText().trim().isEmpty()) {
 
-            if (tfId.getText().equals("")) {
-                repository.salvar(estudio);
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Erro");
+                alerta.setHeaderText("Nome do estúdio obrigatório");
+                alerta.setContentText(
+                        "Informe o nome do estúdio."
+                );
+                alerta.showAndWait();
 
-                //Mostra a mensagem do pós-salvar
-                Alert mensagemSalvar = new Alert(Alert.AlertType.CONFIRMATION);
-                mensagemSalvar.setTitle("Cadastro de estúdio");
-                mensagemSalvar.setHeaderText("O estúdio gravado com sucesso!");
-                mensagemSalvar.setContentText("Deseja cadastrar outro estúdio?");
+                return;
+            }
 
-                Optional<ButtonType> escolha = mensagemSalvar.showAndWait();
+            System.out.println(
+                    "Campo Nome Estudio: ["
+                            + tfNomeEstudio.getText() + "]"
+            );
 
-                if (escolha.get() == ButtonType.OK) {
-                    limparCampos();
+            System.out.println(
+                    "ID = [" + tfId.getText() + "]"
+            );
+
+            int resultado;
+
+            // CADASTRO
+            if (tfId.getText() == null ||
+                    tfId.getText().trim().isEmpty()) {
+
+                resultado = repository.salvar(estudio);
+
+            }
+            // EDIÇÃO
+            else {
+
+                try {
+
+                    estudio.setId(
+                            Integer.parseInt(
+                                    tfId.getText().trim()
+                            )
+                    );
+
+                    repository.editar(estudio);
+
+                    resultado = 1;
+
+                } catch (NumberFormatException e) {
+
+                    Alert erro = new Alert(
+                            Alert.AlertType.ERROR
+                    );
+
+                    erro.setTitle("Erro");
+                    erro.setHeaderText("ID inválido");
+                    erro.setContentText(
+                            "Não foi possível editar o registro."
+                    );
+
+                    erro.showAndWait();
+
+                    return;
+                }
+            }
+
+            if (resultado > 0) {
+
+                Alert mensagem =
+                        new Alert(Alert.AlertType.INFORMATION);
+
+                mensagem.setTitle("Cadastro de Estúdio");
+
+                if (tfId.getText() == null ||
+                        tfId.getText().trim().isEmpty()) {
+
+                    mensagem.setHeaderText(
+                            "Estúdio cadastrado com sucesso!"
+                    );
+
                 } else {
-                    stage.close();
+
+                    mensagem.setHeaderText(
+                            "Estúdio atualizado com sucesso!"
+                    );
                 }
 
+                mensagem.showAndWait();
 
-            } else {
-                estudio.setId(Integer.parseInt(tfId.getText()));
-                repository.editar(estudio);
-
-                //Mostra mensagem a pós-editar
-                Alert mensagemEditar = new Alert(Alert.AlertType.CONFIRMATION);
-                mensagemEditar.setTitle("Atualização de estudio");
-                mensagemEditar.setHeaderText("O estudio foi atualizado com sucesso!");
-
-                mensagemEditar.showAndWait();
                 stage.close();
 
+            } else {
 
+                Alert erro = new Alert(Alert.AlertType.ERROR);
+
+                erro.setTitle("Erro");
+                erro.setHeaderText(
+                        "Não foi possível salvar o estúdio."
+                );
+
+                erro.showAndWait();
             }
         });
 
@@ -209,13 +278,13 @@ public class TelaEstudio {
 
         return painelBotoes;
     }
-    private void limparCampos() {
-
-        tfNomeEstudio.clear();
-        tfNomeFundador.clear();
-        tfPaisOrigem.clear();
-        dpAnoFundacao.setValue(LocalDate.now());
-        tfNomeFundador.requestFocus();
-    }
+//    private void limparCampos() {
+//
+//        tfNomeEstudio.clear();
+//        tfNomeFundador.clear();
+//        tfPaisOrigem.clear();
+//        dpAnoFundacao.setValue(LocalDate.now());
+//        tfNomeFundador.requestFocus();
+//    }
 
 }

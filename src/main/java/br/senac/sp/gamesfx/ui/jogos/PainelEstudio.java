@@ -62,6 +62,10 @@ public class PainelEstudio {
 
         EstudioRepository Estudio = new EstudioRepository();
 
+        tabelaEstudios.setItems(
+                EstudioRepository.getEstudios()
+        );
+
         tabelaEstudios.getColumns().addAll(colunaEstudio_Id, colunaNomeEstudio, colunaNomeFundador,
                 colunaAnoFundacao, colunaPaisOrigem);
         // Adicionando a lista de jogos na tabela
@@ -125,6 +129,29 @@ public class PainelEstudio {
                     tabelaEstudios.getSelectionModel().getSelectedItem();
 
             if (excluirEstudio == null) {
+
+                Alert alerta = new Alert(Alert.AlertType.WARNING);
+                alerta.setTitle("Excluir Estúdio");
+                alerta.setHeaderText("Selecione um estúdio.");
+                alerta.showAndWait();
+
+                return;
+            }
+
+            Alert confirmacao = new Alert(
+                    Alert.AlertType.CONFIRMATION);
+
+            confirmacao.setTitle("Excluir");
+            confirmacao.setHeaderText(
+                    "Deseja excluir o estúdio selecionado?");
+
+            if (confirmacao.showAndWait().get() == ButtonType.OK) {
+
+                EstudioRepository.excluir(excluirEstudio.getId());
+
+                tabelaEstudios.setItems(
+                        EstudioRepository.getEstudios()
+                );
             }
         });
 

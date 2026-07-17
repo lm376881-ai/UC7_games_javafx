@@ -52,8 +52,8 @@ public class TelaPrincipal extends Application {
 
         Button btnHome = criarBotaoMenu("Home");
         btnHome.setOnAction(clique -> {
-            PainelPlataforma painelPlataforma = new PainelPlataforma(stage);
-            raiz.setCenter(painelPlataforma.criarPainelPLataforma());
+            PainelHome painelHome = new PainelHome();
+            raiz.setCenter(painelHome.criarPainelHome());
         });
 
 

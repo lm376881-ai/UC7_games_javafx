@@ -49,7 +49,7 @@ public class TelaPlataforma {
         raiz.setCenter(criarFormulario());
         raiz.setBottom(criarPainelBotoes(stage));
 
-        Scene cena = new Scene(raiz, 500, 400);
+        Scene cena = new Scene(raiz, 400, 600);
         stage.setScene(cena);
         stage.setResizable(false);
         stage.showAndWait();
@@ -69,7 +69,8 @@ public class TelaPlataforma {
         iv.setFitHeight(40);
 
         Label titulo = new Label("Cadastro de Plataforma");
-        titulo.setStyle("-fx-font-size: 22; -fx-text-fill: white; -fx-font-weight: bold;");
+        titulo.setStyle("-fx-font-size: 28; " + "-fx-font-weight: bold; " + "-fx-text-fill: #ffffff;");
+
 
         painel.getChildren().addAll(iv, titulo);
 
@@ -82,6 +83,7 @@ public class TelaPlataforma {
         box.setPadding(new Insets(20));
 
         GridPane grid = new GridPane();
+        grid.setStyle("-fx-border-width: 2; " + "-fx-border-color: #676767; " + "-fx-border-radius: 32");
         grid.setHgap(10);
         grid.setVgap(10);
 
@@ -122,13 +124,21 @@ public class TelaPlataforma {
         return box;
     }
 
+
+
     private HBox criarPainelBotoes(Stage stage) {
 
         HBox box = new HBox(10);
         box.setPadding(new Insets(10));
         box.setAlignment(Pos.CENTER_RIGHT);
+        box.setStyle("-fx-background-color: #afafaf");
 
-        Button btnSalvar = new Button("Salvar");
+        Button btnSalvar = new Button();
+        Image imgSalvar = new Image(
+                getClass().getResourceAsStream("/imagens/salve.png")
+        );
+        ImageView ivSalvar = new ImageView(imgSalvar);
+        btnSalvar.setGraphic(ivSalvar);
 
         btnSalvar.setOnAction(e -> {
 
@@ -192,7 +202,12 @@ public class TelaPlataforma {
             }
         });
 
-        Button btnCancelar = new Button("Cancelar");
+        Button btnCancelar = new Button();
+        Image imgCancelar = new Image(
+                getClass().getResourceAsStream("/imagens/cancelar.png")
+        );
+        ImageView ivCancelar = new ImageView(imgCancelar);
+        btnCancelar.setGraphic(ivCancelar);
         btnCancelar.setOnAction(e -> stage.close());
 
         box.getChildren().addAll(

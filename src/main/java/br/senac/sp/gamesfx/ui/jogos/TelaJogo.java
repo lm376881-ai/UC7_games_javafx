@@ -64,7 +64,7 @@ public class TelaJogo {
         raiz.setCenter(criarFormulario());
         raiz.setBottom(criarPainelBotoes(stage));
 
-        Scene cena = new Scene(raiz, 500, 700);
+        Scene cena = new Scene(raiz, 400, 600);
 
 //        stage.setHeight(400);
 //        stage.setWidth(500);
