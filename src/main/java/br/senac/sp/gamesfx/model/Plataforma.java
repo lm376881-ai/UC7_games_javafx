@@ -17,7 +17,7 @@ public class Plataforma {
         this.nome = nome;
         this.fabricante = fabricante;
         this.dataLancamento = dataLancamento;
-//        this.valor = valor;
+       this.valor = valor;
     }
 
     public Plataforma() {
