@@ -9,7 +9,7 @@ public class Plataforma {
     private String fabricante;
     private LocalDate dataLancamento;
     private double valor;
-    private boolean finalizado;
+   private boolean finalizado;
 
     public Plataforma(int id, String nome, String fabricante,
                       LocalDate dataLancamento, double valor) {
@@ -17,7 +17,7 @@ public class Plataforma {
         this.nome = nome;
         this.fabricante = fabricante;
         this.dataLancamento = dataLancamento;
-        this.valor = valor;
+//        this.valor = valor;
     }
 
     public Plataforma() {

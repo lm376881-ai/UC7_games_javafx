@@ -69,7 +69,7 @@ public class PlataformaRepository {
             stmt.setString(1, plataforma.getNome());
             stmt.setString(2, plataforma.getFabricante());
             stmt.setString(3, plataforma.getDataLancamento().toString());
-            stmt.setDouble(4, plataforma.getValor());
+           stmt.setDouble(4, plataforma.getValor());
 
             stmt.executeUpdate();
 
@@ -148,7 +148,7 @@ public class PlataformaRepository {
             stm.setString(1, plataforma.getNome());
             stm.setString(2, plataforma.getFabricante());
             stm.setString(3, plataforma.getDataLancamento().toString());
-            stm.setDouble(4, plataforma.getValor());
+           stm.setDouble(4, plataforma.getValor());
             stm.setInt(5, plataforma.getId());
 
             stm.executeUpdate();

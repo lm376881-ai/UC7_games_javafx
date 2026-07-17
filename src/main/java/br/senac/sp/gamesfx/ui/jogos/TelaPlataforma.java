@@ -32,7 +32,7 @@ public class TelaPlataforma {
         tfId.setText(String.valueOf(plataforma.getId()));
         tfNome.setText(plataforma.getNome());
         tfFabricante.setText(plataforma.getFabricante());
-        tfValor.setText(String.valueOf(plataforma.getValor()));
+//        tfValor.setText(String.valueOf(plataforma.getValor()));
         dpDataLancamento.setValue(plataforma.getDataLancamento());
     }
 
@@ -131,7 +131,6 @@ public class TelaPlataforma {
         HBox box = new HBox(10);
         box.setPadding(new Insets(10));
         box.setAlignment(Pos.CENTER_RIGHT);
-        box.setStyle("-fx-background-color: #afafaf");
 
         Button btnSalvar = new Button();
         Image imgSalvar = new Image(
@@ -155,7 +154,7 @@ public class TelaPlataforma {
                                 tfValor.getText().replace(",", ".")
                         );
 
-                plataforma.setValor(valor);
+//                plataforma.setValor(valor);
 
                 PlataformaRepository repository =
                         new PlataformaRepository();
