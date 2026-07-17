@@ -62,12 +62,6 @@ public class EstudioRepository {
             stmt.setInt(3, estudio.getAnoFundacao());
             stmt.setString(4, estudio.getPaisOrigem());
 
-//            System.out.println("NomeEstudio: " + estudio.getNomeEstudio());
-//            System.out.println("NomeFundador: " + estudio.getNomeFundador());
-//            System.out.println("AnoFundacao: " + estudio.getAnoFundacao());
-//            System.out.println("PaisOrigem: " + estudio.getPaisOrigem());
-
-
 
             int resultado = stmt.executeUpdate();
             ConexaoSQLite.fecharConexao();

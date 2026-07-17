@@ -73,11 +73,11 @@ public class TelaPrincipal extends Application {
 
         raiz.setCenter(painelHome.criarPainelHome());
 
-        Scene cena = new Scene(raiz, 900,600);
+        Scene cena = new Scene(raiz, 900,700);
         stage.setScene(cena);
         stage.setTitle("Sistema de Gestão de Jogos V1.0");
         stage.setResizable(true);
-        // stage.setMaximized(true);
+        //stage.setMaximized(true);
         stage.getIcons().add(iconeTela);
         stage.show();
     }

@@ -116,7 +116,6 @@ public class TelaJogo {
 
         VBox formulario = new VBox();
         formulario.setPadding(new Insets(20));
-
         GridPane gridFormulario = new GridPane(5, 5);
         gridFormulario.setGridLinesVisible(false);
         gridFormulario.setPadding(new Insets(20));

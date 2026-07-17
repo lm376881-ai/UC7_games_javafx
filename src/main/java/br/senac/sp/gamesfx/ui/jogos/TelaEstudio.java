@@ -44,8 +44,7 @@ public class TelaEstudio {
         stage.initOwner(stagePai);
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        stage.setMaxWidth(500);
-        stage.setMaxHeight(500);
+
         stage.setTitle("Cadastro de Estudios");
 
         BorderPane raiz = new BorderPane();
@@ -54,6 +53,8 @@ public class TelaEstudio {
         raiz.setBottom(criarPainelBotoes(stage));
 
         Scene cena = new Scene(raiz, 400, 600);
+        stage.setMaxWidth(500);
+        stage.setMaxHeight(500);
 
 
         stage.setResizable(false);
@@ -88,11 +89,12 @@ public class TelaEstudio {
 
         VBox formulario = new VBox();
         formulario.setPadding(new Insets(20));
-
-        GridPane gridFormulario = new GridPane(5,5);
+        GridPane gridFormulario = new GridPane(5, 5);
         gridFormulario.setGridLinesVisible(false);
         gridFormulario.setPadding(new Insets(20));
-        gridFormulario.setStyle("-fx-border-width: 2; " + "-fx-border-color: #676767; " + "-fx-border-radius: 32");
+        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color: #aaaaaa;-fx-border-radius: 32");
+
+
 
         //Criar os componentes que seram importados no grid
         Label lblEstudioId = new Label("ID:");

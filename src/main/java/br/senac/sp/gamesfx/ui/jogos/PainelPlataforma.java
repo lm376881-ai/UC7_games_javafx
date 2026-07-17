@@ -27,6 +27,8 @@ public class PainelPlataforma {
         this.stage = stage;
     }
 
+
+
     public VBox criarPainelPLataforma() {
 
         VBox painelPlataforma = new VBox();
@@ -39,7 +41,7 @@ public class PainelPlataforma {
                 new Insets(10, 10, 10, 10)
         );
 
-        Label lblTitulo = new Label("Plataformas");
+        Label lblTitulo = new Label("Lista de plataformas!");
 
         lblTitulo.setStyle(
                 "-fx-font-size:24;" +
@@ -52,10 +54,7 @@ public class PainelPlataforma {
         TableView<Plataforma> tabelaPlataforma =
                 new TableView<>();
 
-        VBox.setVgrow(
-                tabelaPlataforma,
-                Priority.ALWAYS
-        );
+        VBox.setVgrow(tabelaPlataforma, Priority.ALWAYS);
 
         // Dados do banco
         tabelaPlataforma.setItems(
@@ -286,20 +285,19 @@ public class PainelPlataforma {
         return painelPlataforma;
     }
 
-    private Button criarBotao(
-            String textoBotao,
-            String urlImagem) {
+    private Button criarBotao(String textoBotao, String urlImagem) {
 
         Image image = new Image(getClass().getResourceAsStream(urlImagem));
 
         ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(20);
+        imageView.setFitHeight(20);
+        Button button = new Button();
+        button.setPrefWidth(110);
+        button.setPrefHeight(50);
+        button.setText(textoBotao);
+        button.setGraphic(imageView);
 
-        imageView.setFitHeight(16);
-        imageView.setFitWidth(16);
-
-        return new Button(
-                textoBotao,
-                imageView
-        );
+        return button;
     }
 }

@@ -50,9 +50,13 @@ public class TelaPlataforma {
         raiz.setBottom(criarPainelBotoes(stage));
 
         Scene cena = new Scene(raiz, 400, 600);
+        stage.setMaxWidth(500);
+        stage.setHeight(500);
         stage.setScene(cena);
         stage.setResizable(false);
         stage.showAndWait();
+
+
     }
 
     private HBox criarPainelTitulo() {
@@ -79,13 +83,13 @@ public class TelaPlataforma {
 
     private VBox criarFormulario() {
 
-        VBox box = new VBox(10);
-        box.setPadding(new Insets(20));
+        VBox formulario = new VBox();
+        formulario.setPadding(new Insets(20));
+        GridPane gridFormulario = new GridPane(5, 5);
+        gridFormulario.setGridLinesVisible(false);
+        gridFormulario.setPadding(new Insets(20));
+        gridFormulario.setStyle("-fx-border-width: 2; -fx-border-color: #676767;-fx-border-radius: 32");
 
-        GridPane grid = new GridPane();
-        grid.setStyle("-fx-border-width: 2; " + "-fx-border-color: #676767; " + "-fx-border-radius: 32");
-        grid.setHgap(10);
-        grid.setVgap(10);
 
         //  Campos
         Label lblId = new Label("ID:");
@@ -103,25 +107,25 @@ public class TelaPlataforma {
         Label lblData = new Label("Data de Lançamento:");
         dpDataLancamento.setValue(LocalDate.now());
 
-        //  Adicionar no grid
-        grid.add(lblId, 0, 0);
-        grid.add(tfId, 1, 0);
+        //  Adicionar no gridFormulario
+        gridFormulario.add(lblId, 0, 0);
+        gridFormulario.add(tfId, 1, 0);
 
-        grid.add(lblNome, 0, 1);
-        grid.add(tfNome, 1, 1);
+        gridFormulario.add(lblNome, 0, 1);
+        gridFormulario.add(tfNome, 1, 1);
 
-        grid.add(lblFabricante, 0, 2);
-        grid.add(tfFabricante, 1, 2);
+        gridFormulario.add(lblFabricante, 0, 2);
+        gridFormulario.add(tfFabricante, 1, 2);
 
-        grid.add(lblValor, 0, 3);
-        grid.add(tfValor, 1, 3);
+        gridFormulario.add(lblValor, 0, 3);
+        gridFormulario.add(tfValor, 1, 3);
 
-        grid.add(lblData, 0, 4);
-        grid.add(dpDataLancamento, 1, 4);
+        gridFormulario.add(lblData, 0, 4);
+        gridFormulario.add(dpDataLancamento, 1, 4);
 
-        box.getChildren().add(grid);
+        formulario.getChildren().add(gridFormulario);
 
-        return box;
+        return formulario;
     }
 
 
@@ -154,7 +158,7 @@ public class TelaPlataforma {
                                 tfValor.getText().replace(",", ".")
                         );
 
-//                plataforma.setValor(valor);
+                plataforma.setValor(valor);
 
                 PlataformaRepository repository =
                         new PlataformaRepository();

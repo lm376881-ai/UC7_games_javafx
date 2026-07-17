@@ -193,14 +193,11 @@ public class PainelJogos {
 
     private Button criarBotao(String textoBotao, String urlImagem) {
 
-        Image image =
-                new Image(getClass().getResourceAsStream(urlImagem));
+        Image image = new Image(getClass().getResourceAsStream(urlImagem));
 
         ImageView imageView = new ImageView(image);
-
         imageView.setFitWidth(20);
         imageView.setFitHeight(20);
-
         Button button = new Button();
         button.setPrefWidth(110);
         button.setPrefHeight(50);

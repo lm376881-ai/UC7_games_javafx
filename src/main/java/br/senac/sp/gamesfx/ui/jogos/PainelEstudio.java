@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.time.LocalDate;
@@ -23,13 +24,13 @@ public class PainelEstudio {
 
     public VBox criarPainelEstudio() {
         VBox painelEstudio = new VBox();
-        painelEstudio.setPadding(new Insets(5, 20, 20, 20));
-        painelEstudio.setStyle("-fx-background-color: #676767");
+        painelEstudio.setPadding(new Insets(10, 10, 10, 10));
+        painelEstudio.setStyle("-fx-background-color: #aaaaaa");
 
         //Titulo painel Estudios
 
-        Label lblTitulo = new Label("Listagem de Estudios");
-        lblTitulo.setStyle("-fx-font-size: 23; -fx-text-fill: #ffffff; -fx-font-weight: bold");
+        Label lblTitulo = new Label("Listagem de estudios!");
+        lblTitulo.setStyle("-fx-font-size: 24; -fx-text-fill: #ffffff; -fx-font-weight: bold");
 
         //Linha abaixo do label
         Separator linha = new Separator();
@@ -37,34 +38,37 @@ public class PainelEstudio {
         //Criar uma tabela de listagem de dados
         TableView<Estudio> tabelaEstudios = new TableView<>();
 
+        tabelaEstudios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        VBox.setVgrow(tabelaEstudios, Priority.ALWAYS);
+
         //Criar colunas na tabela Estudios
         TableColumn<Estudio, Integer> colunaEstudio_Id = new TableColumn<>("ID");
         colunaEstudio_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colunaEstudio_Id.setPrefWidth(18);
+        colunaEstudio_Id.setPrefWidth(40);
 
         TableColumn<Estudio, String> colunaNomeFundador = new TableColumn<>("NOME_FUNDADOR");
         colunaNomeFundador.setCellValueFactory(new PropertyValueFactory<>("nomeFundador"));
-        colunaNomeFundador.setPrefWidth(230);
+        colunaNomeFundador.setPrefWidth(235);
 
         TableColumn<Estudio, String> colunaNomeEstudio = new TableColumn<>("NOME_ESTUDIO");
         colunaNomeEstudio.setCellValueFactory(new PropertyValueFactory<>("nomeEstudio"));
-        colunaNomeEstudio.setPrefWidth(230);
+        colunaNomeEstudio.setPrefWidth(100);
 
         TableColumn<Estudio, LocalDate> colunaAnoFundacao = new TableColumn<>("ANO_FUNDAÇÃO");
         colunaAnoFundacao.setCellValueFactory(new PropertyValueFactory<>("anoFundacao"));
-        colunaAnoFundacao.setPrefWidth(95);
+        colunaAnoFundacao.setPrefWidth(100);
 
         TableColumn<Estudio, String> colunaPaisOrigem = new TableColumn<>("PAÍS_ORIGEM");
         colunaPaisOrigem.setCellValueFactory(new PropertyValueFactory<>("paisOrigem"));
-        colunaPaisOrigem.setPrefWidth(95);
+        colunaPaisOrigem.setPrefWidth(100);
+
 
         //Obter os dados que serão exibidos
 
         EstudioRepository Estudio = new EstudioRepository();
 
-        tabelaEstudios.setItems(
-                EstudioRepository.getEstudios()
-        );
+        tabelaEstudios.setItems(EstudioRepository.getEstudios());
 
         tabelaEstudios.getColumns().addAll(colunaEstudio_Id, colunaNomeEstudio, colunaNomeFundador,
                 colunaAnoFundacao, colunaPaisOrigem);
@@ -168,9 +172,10 @@ public class PainelEstudio {
     }
 
     private Button criarBotao(String textoBotao, String urlImagem) {
-        Image image = new Image(getClass().getResourceAsStream(urlImagem));
-        ImageView imageView = new ImageView(image);
 
+        Image image = new Image(getClass().getResourceAsStream(urlImagem));
+
+        ImageView imageView = new ImageView(image);
         imageView.setFitWidth(20);
         imageView.setFitHeight(20);
         Button button = new Button();
